@@ -14,6 +14,7 @@ public class MessageUtils {
     private static DefaultTableModel defaultTableModel = new DefaultTableModel();
     private static EnumNNTP nntp = EnumNNTP.INSTANCE;
     private static Vector messages = new Vector();
+    private static MessageBean messageBean = new MessageBean();
 
     public static void loadMessages() throws Exception {
         List<Message> listOfMessages = nntp.getMessages(false);//nntp debug off
@@ -62,5 +63,14 @@ public class MessageUtils {
 
     public static void setMessages(Vector messages) {
         MessageUtils.messages = messages;
+    }
+
+    public static MessageBean getMessageBean(int i) {
+        messageBean = (MessageBean) messages.elementAt(i);
+        return messageBean;
+    }
+
+    public static void setMessageBean(MessageBean aMessageBean) {
+        messageBean = aMessageBean;
     }
 }

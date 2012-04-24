@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import javax.mail.Address;
 import javax.mail.Message;
 
-public final class MessageBean {
+public class MessageBean {
 
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = Logger.getLogger(MessageBean.class.getName());
@@ -18,7 +18,7 @@ public final class MessageBean {
     private URL link;
     private Vector vector = new Vector();
 
-    private MessageBean() {
+    public MessageBean() {
     }
 
     public MessageBean(Message message) throws Exception {
