@@ -7,11 +7,11 @@ import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.swing.table.DefaultTableModel;
 
-public class NewJFrame extends javax.swing.JFrame {
+public class MessagesJFrame extends javax.swing.JFrame {
 
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
 
-    public NewJFrame() throws Exception {
+    public MessagesJFrame() throws Exception {
         initComponents();
         EnumNNTP nntp = EnumNNTP.INSTANCE;
         List<Message> listOfMessages = nntp.getMessages(false);//nntp debug off
@@ -88,13 +88,13 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MessagesJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MessagesJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MessagesJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MessagesJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -105,9 +105,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
             public void run() {
                 try {
-                    new NewJFrame().setVisible(true);
+                    new MessagesJFrame().setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MessagesJFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
