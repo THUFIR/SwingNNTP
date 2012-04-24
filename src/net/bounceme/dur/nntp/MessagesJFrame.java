@@ -1,8 +1,5 @@
 package net.bounceme.dur.nntp;
 
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -11,21 +8,12 @@ public class MessagesJFrame extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = Logger.getLogger(MessagesJFrame.class.getName());
-    private DefaultTableModel dtm = new DefaultTableModel();
+    private DefaultTableModel dataTableModel = new DefaultTableModel();
 
     public MessagesJFrame() throws Exception {
         initComponents();
         MessageUtils.loadMessages();
-        dtm = MessageUtils.getDataTableModel();
-        Vector vector = dtm.getDataVector();
-        Iterator it = vector.iterator();
-        while (it.hasNext()) {
-            Vector v = (Vector) it.next();
-            Iterator i = v.iterator();
-            while (i.hasNext()) {
-                LOG.info(i.next().toString());
-            }
-        }
+        dataTableModel = MessageUtils.getDataTableModel();
     }
 
         /**
@@ -42,7 +30,7 @@ public class MessagesJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(dtm);
+        jTable1.setModel(dataTableModel);
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

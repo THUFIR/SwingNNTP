@@ -1,5 +1,6 @@
 package net.bounceme.dur.nntp;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Logger;
@@ -10,39 +11,48 @@ public class MessageUtils {
 
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = Logger.getLogger(MessageUtils.class.getName());
-    private static DefaultTableModel dtm = new DefaultTableModel();
+    private static DefaultTableModel dataTableModel = new DefaultTableModel();
     private static EnumNNTP nntp = EnumNNTP.INSTANCE;
     private static Vector messages = new Vector();
 
     public static void loadMessages() throws Exception {
-        List<Message> msgs = nntp.getMessages(false);
+        List<Message> listOfMessages = nntp.getMessages(false);//nntp debug off
         messages.clear();
-        for (Message m : msgs) {
-            MessageBean mb = new MessageBean(m);
-            messages.add(mb);
+        for (Message m : listOfMessages) {
+            MessageBean messageBean = new MessageBean(m);
+            messages.add(messageBean);
         }
         loadTableModel();
     }
 
     private static void loadTableModel() {
-        dtm = new DefaultTableModel();
-        dtm.addColumn("from");
-        dtm.addColumn("sent");
-        dtm.addColumn("subject");
-        dtm.addColumn("content");
-        for (Object o : messages) {
-            MessageBean m = (MessageBean) o;
-            Vector v = m.getVector();
-            dtm.addRow(v);
+        dataTableModel = new DefaultTableModel();
+        dataTableModel.addColumn("from");
+        dataTableModel.addColumn("sent");
+        dataTableModel.addColumn("subject");
+        dataTableModel.addColumn("content");
+        for (Object o : messages) {  //awkward Vector manipulation
+            MessageBean messageBean = (MessageBean) o;
+            Vector messageBeanAsVector = messageBean.getVector();
+            dataTableModel.addRow(messageBeanAsVector);
         }
     }
 
     public static DefaultTableModel getDataTableModel() {
-        return dtm;
+        Vector vector = dataTableModel.getDataVector();
+        Iterator it = vector.iterator();
+        while (it.hasNext()) {
+            Vector v = (Vector) it.next();
+            Iterator i = v.iterator();
+            while (i.hasNext()) {
+                LOG.info(i.next().toString());
+            }
+        }
+        return dataTableModel;
     }
 
     public static void setDataTableModel(DefaultTableModel dataTableModel) {
-        MessageUtils.dtm = dataTableModel;
+        MessageUtils.dataTableModel = dataTableModel;
     }
 
     public static Vector getMessages() {
