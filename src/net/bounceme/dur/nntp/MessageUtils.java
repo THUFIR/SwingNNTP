@@ -6,11 +6,11 @@ import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.swing.table.DefaultTableModel;
 
-public class MessageUtil {
+public class MessageUtils {
 
     private static final long serialVersionUID = 1L;
-    private static final Logger LOG = Logger.getLogger(MessageUtil.class.getName());
-    private static DefaultTableModel dataTableModel = new DefaultTableModel();
+    private static final Logger LOG = Logger.getLogger(MessageUtils.class.getName());
+    private static DefaultTableModel dtm = new DefaultTableModel();
     private static EnumNNTP nntp = EnumNNTP.INSTANCE;
     private static Vector messages = new Vector();
 
@@ -21,14 +21,28 @@ public class MessageUtil {
             MessageBean mb = new MessageBean(m);
             messages.add(mb);
         }
+        loadTableModel();
+    }
+
+    private static void loadTableModel() {
+        dtm = new DefaultTableModel();
+        dtm.addColumn("from");
+        dtm.addColumn("sent");
+        dtm.addColumn("subject");
+        dtm.addColumn("content");
+        for (Object o : messages) {
+            MessageBean m = (MessageBean) o;
+            Vector v = m.getVector();
+            dtm.addRow(v);
+        }
     }
 
     public static DefaultTableModel getDataTableModel() {
-        return dataTableModel;
+        return dtm;
     }
 
     public static void setDataTableModel(DefaultTableModel dataTableModel) {
-        MessageUtil.dataTableModel = dataTableModel;
+        MessageUtils.dtm = dataTableModel;
     }
 
     public static Vector getMessages() {
@@ -36,6 +50,6 @@ public class MessageUtil {
     }
 
     public static void setMessages(Vector messages) {
-        MessageUtil.messages = messages;
+        MessageUtils.messages = messages;
     }
 }
