@@ -1,33 +1,19 @@
 package net.bounceme.dur.nntp;
 
-import java.util.List;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.Message;
 import javax.swing.table.DefaultTableModel;
 
 public class MessagesJFrame extends javax.swing.JFrame {
 
+    private static final long serialVersionUID = 1L;
+    private static final Logger LOG = Logger.getLogger(MessagesJFrame.class.getName());
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
 
     public MessagesJFrame() throws Exception {
+        MessageUtils.loadMessages();
+        defaultTableModel = MessageUtils.getDataTableModel();
         initComponents();
-        EnumNNTP nntp = EnumNNTP.INSTANCE;
-        List<Message> listOfMessages = nntp.getMessages(false);//nntp debug off
-        Vector messages = new Vector();
-        for (Message m : listOfMessages) {
-            MessageBean messageBean = new MessageBean(m);
-            messages.add(messageBean);
-        }
-        defaultTableModel.addColumn("from");
-        defaultTableModel.addColumn("sent");
-        defaultTableModel.addColumn("subject");
-        for (Object o : messages) {  //awkward Vector manipulation
-            MessageBean messageBean = (MessageBean) o;
-            Vector messageBeanAsVector = messageBean.getVector();
-            defaultTableModel.addRow(messageBeanAsVector);
-        }
     }
 
     /**
@@ -45,6 +31,14 @@ public class MessagesJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(defaultTableModel);
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.setShowHorizontalLines(false);
+        jTable1.setShowVerticalLines(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -66,6 +60,10 @@ public class MessagesJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        LOG.log(Level.INFO, "clicked{0}", evt);
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
