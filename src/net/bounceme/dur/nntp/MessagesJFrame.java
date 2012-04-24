@@ -62,7 +62,8 @@ public class MessagesJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        LOG.log(Level.INFO, "clicked{0}", evt);
+         int row = jTable1.rowAtPoint(evt.getPoint());
+        LOG.log(Level.INFO, "clicked {0}", row);
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**
