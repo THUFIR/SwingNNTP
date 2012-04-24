@@ -30,7 +30,6 @@ public final class MessageBean {
         vector.add(getFrom());
         vector.add(getSent());
         vector.add(getSubject());
-        vector.add(getContent());
     }
 
     public String getFrom() {

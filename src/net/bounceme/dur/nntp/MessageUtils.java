@@ -11,7 +11,7 @@ public class MessageUtils {
 
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = Logger.getLogger(MessageUtils.class.getName());
-    private static DefaultTableModel dataTableModel = new DefaultTableModel();
+    private static DefaultTableModel defaultTableModel = new DefaultTableModel();
     private static EnumNNTP nntp = EnumNNTP.INSTANCE;
     private static Vector messages = new Vector();
 
@@ -26,33 +26,34 @@ public class MessageUtils {
     }
 
     private static void loadTableModel() {
-        dataTableModel = new DefaultTableModel();
-        dataTableModel.addColumn("from");
-        dataTableModel.addColumn("sent");
-        dataTableModel.addColumn("subject");
-        dataTableModel.addColumn("content");
+        defaultTableModel = new DefaultTableModel();
+        defaultTableModel.addColumn("from");
+        defaultTableModel.addColumn("sent");
+        defaultTableModel.addColumn("subject");
         for (Object o : messages) {  //awkward Vector manipulation
             MessageBean messageBean = (MessageBean) o;
             Vector messageBeanAsVector = messageBean.getVector();
-            dataTableModel.addRow(messageBeanAsVector);
+            defaultTableModel.addRow(messageBeanAsVector);
         }
     }
 
     public static DefaultTableModel getDataTableModel() {
-        Vector vector = dataTableModel.getDataVector();
+        Vector vector = defaultTableModel.getDataVector();
         Iterator it = vector.iterator();
         while (it.hasNext()) {
             Vector v = (Vector) it.next();
             Iterator i = v.iterator();
+            StringBuilder row = new StringBuilder();
             while (i.hasNext()) {
-                LOG.info(i.next().toString());
+                row.append(i.next());
             }
+            LOG.info(row.toString());
         }
-        return dataTableModel;
+        return defaultTableModel;
     }
 
     public static void setDataTableModel(DefaultTableModel dataTableModel) {
-        MessageUtils.dataTableModel = dataTableModel;
+        MessageUtils.defaultTableModel = dataTableModel;
     }
 
     public static Vector getMessages() {
