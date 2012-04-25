@@ -2,6 +2,7 @@ package net.bounceme.dur.nntp;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JSlider;
 import javax.swing.JTable;
@@ -19,6 +20,17 @@ public class Simple {
 
     public static void main(String args[]) {
         table.setModel(dtm);
+
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+            private void tableMouseClicked(MouseEvent evt) {
+                throw new UnsupportedOperationException("Not yet implemented");
+            }
+        });
+
         slider.setMaximum(MessageUtils.getMax());
         slider.addChangeListener(new javax.swing.event.ChangeListener() {
 
@@ -30,6 +42,8 @@ public class Simple {
                 int index = slider.getValue();
                 MessageUtils.setIndex(index);
                 dtm = MessageUtils.getDataTableModel();
+                f.revalidate();
+                f.repaint();
             }
         });
 
