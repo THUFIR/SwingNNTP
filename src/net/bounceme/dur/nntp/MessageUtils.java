@@ -20,13 +20,13 @@ public class MessageUtils {
     private static int max;
 
     public static void init() {
-        max = nntp.getSize();
-        index = max - 10;
+        setMax(nntp.getSize());
+        setIndex(getMax() - 10);
         loadMessages();
     }
 
     private static void loadMessages() {
-        List<Message> listOfMessages = nntp.getMessages(index - pageSize, index);
+        List<Message> listOfMessages = nntp.getMessages(getIndex() - pageSize, getIndex());
         for (Message m : listOfMessages) {
             MessageBean messageBean = null;
             try {
@@ -82,12 +82,29 @@ public class MessageUtils {
         return messageBean;
     }
 
-    public static void page(boolean isBack) {
-        LOG.log(Level.INFO, "MessageUtils.page..{0}", isBack);
-        index = isBack ? index - 10 : index + 10;
-        index = index < pageSize + 1 ? pageSize + 1 : index;  //to prevent negative pages
-        index = index > max ? max - pageSize : index;  //to prevent paging too far
-        LOG.log(Level.INFO, "MessageUtils.page..{0}", index);
-        loadMessages();
+    public static int getIndex() {
+        return index;
+    }
+
+    public static void setIndex(int aIndex) {
+        LOG.log(Level.INFO, "MessageUtils.setIndex..trying {0}", aIndex);
+        if (aIndex < pageSize + 1) {  //goldilocks check on aIndex
+            aIndex = pageSize + 1;
+            LOG.log(Level.INFO, "too small, setting default..{0}", aIndex);
+        } else if (aIndex >= getMax() - pageSize) {
+            aIndex = getMax() - pageSize;
+            LOG.log(Level.INFO, "too big, setting default..{0}", aIndex);
+        } else {
+            LOG.log(Level.INFO, "just right, setting..{0}", aIndex);
+        }
+        index = aIndex;
+    }
+
+    public static int getMax() {
+        return max;
+    }
+
+    public static void setMax(int aMax) {
+        max = aMax;
     }
 }
