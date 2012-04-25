@@ -11,10 +11,7 @@ import javax.swing.table.DefaultTableModel;
 public class Simple {
 
     private static JFrame f = new JFrame();
-    private static JTextPane text = new JTextPane();
     private static JSlider slider = new JSlider();
-    private static DefaultTableModel dtm = MessageUtils.getDataTableModel();
-    private static JTable table = new JTable();
 
     public static void main(String args[]) {
         table.setModel(dtm);
@@ -39,7 +36,8 @@ public class Simple {
                 MessageUtils.setIndex(index);
                 dtm = MessageUtils.getDataTableModel();
                 table.setModel(dtm);
-                
+                table.revalidate();
+                table.repaint();
                 f.revalidate();
                 f.repaint();
             }
