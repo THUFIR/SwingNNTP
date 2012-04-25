@@ -20,14 +20,18 @@ public class MessageUtils {
     private static int max;
     private static int index;
 
-    public static void loadMessages() throws Exception {
-        List<Message> listOfMessages = nntp.getMessages(false);//nntp debug off
-        messages.clear();
-        for (Message m : listOfMessages) {
-            MessageBean messageBean = new MessageBean(m);
-            messages.add(messageBean);
+    public static void loadMessages() {
+        try {
+            List<Message> listOfMessages = nntp.getMessages(false);//nntp debug off
+            messages.clear();
+            for (Message m : listOfMessages) {
+                MessageBean messageBean = new MessageBean(m);
+                messages.add(messageBean);
+            }
+            loadTableModel();
+        } catch (Exception ex) {
+            Logger.getLogger(MessageUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
-        loadTableModel();
     }
 
     private static void loadTableModel() {

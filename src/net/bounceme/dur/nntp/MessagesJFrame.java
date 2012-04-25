@@ -196,14 +196,8 @@ public class MessagesJFrame extends javax.swing.JFrame {
 
     private void page(boolean isBack) {
         MessageUtils.page(isBack);
-        try {
-            MessageUtils.loadMessages();
-        } catch (Exception ex) {
-            Logger.getLogger(MessagesJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        MessageUtils.loadMessages();
         defaultTableModel = MessageUtils.getDataTableModel();
         jTableMessages.setModel(defaultTableModel);
-        jTableMessages.revalidate();
-        jTableMessages.repaint();
     }
 }
