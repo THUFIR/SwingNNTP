@@ -1,6 +1,5 @@
 package net.bounceme.dur.nntp;
 
-import java.net.URL;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +17,8 @@ public enum EnumNNTP {
     private Folder folder = null;
     private Folder root = null;
     private Store store = null;
+    private int min;
+    private int max;
 
     private EnumNNTP() {
         log.info("SingletonNNTP..only once...");
@@ -45,6 +46,7 @@ public enum EnumNNTP {
         root = store.getDefaultFolder();
         folder = root.getFolder(props.getProperty("nntp.group"));
         folder.open(Folder.READ_ONLY);
+
         setIndex(folder.getMessageCount());
         index = index + 10;
         page(true);
@@ -72,13 +74,29 @@ public enum EnumNNTP {
         this.index = index;
     }
 
-    public void page(boolean back) throws Exception {
+    public void page(boolean isBack) throws Exception {
         log.log(Level.INFO, "SingletonNNTP.page..{0}", index);
-        int difference = back ? -10 : 10;
+        int difference = isBack ? -10 : 10;
         setIndex(index + difference);
         Message[] msgs = folder.getMessages(index - 10, index);
         messages = Arrays.asList(msgs);
         Collections.reverse(messages);
         message = messages.get(0);
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
     }
 }

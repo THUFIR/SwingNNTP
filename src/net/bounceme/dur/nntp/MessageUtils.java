@@ -3,6 +3,7 @@ package net.bounceme.dur.nntp;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.swing.table.DefaultTableModel;
@@ -100,4 +101,13 @@ public class MessageUtils {
     public static void setIndex(int aIndex) {
         index = aIndex;
     }
+
+    public static void page(boolean isBack){
+        try {
+            nntp.page(isBack);
+        } catch (Exception ex) {
+            Logger.getLogger(MessageUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }
