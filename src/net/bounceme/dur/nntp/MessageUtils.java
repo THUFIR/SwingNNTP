@@ -98,6 +98,7 @@ public class MessageUtils {
             LOG.log(Level.INFO, "just right, setting..{0}", aIndex);
         }
         index = aIndex;
+        loadMessages();
     }
 
     public static int getMax() {

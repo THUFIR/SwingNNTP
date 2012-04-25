@@ -98,6 +98,8 @@ public class MessagesJFrame extends javax.swing.JFrame {
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
         int index = jSlider1.getValue();
         MessageUtils.setIndex(index);
+        defaultTableModel = MessageUtils.getDataTableModel();
+        jTableMessages.repaint();
     }//GEN-LAST:event_jSlider1StateChanged
 
     /**
