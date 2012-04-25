@@ -26,24 +26,30 @@ public class MessagesJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableMessages = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        jTextPaneContent = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
 
-        jTable1.setModel(defaultTableModel);
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setShowHorizontalLines(false);
-        jTable1.setShowVerticalLines(false);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableMessages.setModel(defaultTableModel);
+        jTableMessages.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableMessages.setShowHorizontalLines(false);
+        jTableMessages.setShowVerticalLines(false);
+        jTableMessages.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                jTableMessagesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jTableMessages.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTableMessagesKeyPressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableMessages);
 
-        jScrollPane2.setViewportView(jTextPane1);
+        jScrollPane2.setViewportView(jTextPaneContent);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,12 +77,15 @@ public class MessagesJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-         int row = jTable1.rowAtPoint(evt.getPoint());
-        LOG.log(Level.INFO, "clicked {0}", row);
-        MessageBean mb = MessageUtils.getMessageBean(row);
-        jTextPane1.setText(mb.getContent());
-    }//GEN-LAST:event_jTable1MouseClicked
+    private void jTableMessagesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMessagesMouseClicked
+        int row = jTableMessages.rowAtPoint(evt.getPoint());
+        setText(row);
+    }//GEN-LAST:event_jTableMessagesMouseClicked
+
+    private void jTableMessagesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableMessagesKeyPressed
+        //int row = jTableMessages.rowAtPoint(evt.getKeyLocation());
+        //setJFrame(row);
+    }//GEN-LAST:event_jTableMessagesKeyPressed
 
     /**
      * @param args the command line arguments
@@ -126,7 +135,13 @@ public class MessagesJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTable jTableMessages;
+    private javax.swing.JTextPane jTextPaneContent;
     // End of variables declaration//GEN-END:variables
+
+    private void setText(int row) {
+        MessageBean mb = MessageUtils.getMessageBean(row);
+        jTextPaneContent.setText(mb.getContent());
+        jTextPaneContent.setContentType("text/html");
+    }
 }
