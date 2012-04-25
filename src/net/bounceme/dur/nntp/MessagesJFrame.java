@@ -198,5 +198,6 @@ public class MessagesJFrame extends javax.swing.JFrame {
         MessageUtils.page(isBack);
         defaultTableModel = MessageUtils.getDataTableModel();
         jTableMessages.setModel(defaultTableModel);
+        jTableMessages.repaint();
     }
 }

@@ -41,7 +41,6 @@ public class MessageUtils {
 
     private static void loadTableModel() {
         defaultTableModel = new DefaultTableModel();
-        defaultTableModel.addColumn("from");
         defaultTableModel.addColumn("sent");
         defaultTableModel.addColumn("subject");
         for (Object o : messages) {  //awkward Vector manipulation
@@ -83,11 +82,12 @@ public class MessageUtils {
         return messageBean;
     }
 
-    public static void page(boolean isBack){
-        LOG.log(Level.INFO, "MessageUtils.page..");
+    public static void page(boolean isBack) {
+        LOG.log(Level.INFO, "MessageUtils.page..{0}", isBack);
         index = isBack ? index - 10 : index + 10;
         index = index < pageSize + 1 ? pageSize + 1 : index;  //to prevent negative pages
-        index = index > max ? max - pageSize : index;  //to prevent negative pages
+        index = index > max ? max - pageSize : index;  //to prevent paging too far
+        LOG.log(Level.INFO, "MessageUtils.page..{0}", index);
         loadMessages();
     }
 }
