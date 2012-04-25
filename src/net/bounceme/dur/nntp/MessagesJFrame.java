@@ -11,7 +11,7 @@ public class MessagesJFrame extends javax.swing.JFrame {
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
 
     public MessagesJFrame() throws Exception {
-        MessageUtils.loadMessages();
+        MessageUtils.init();
         defaultTableModel = MessageUtils.getDataTableModel();
         initComponents();
     }
@@ -196,7 +196,6 @@ public class MessagesJFrame extends javax.swing.JFrame {
 
     private void page(boolean isBack) {
         MessageUtils.page(isBack);
-        MessageUtils.loadMessages();
         defaultTableModel = MessageUtils.getDataTableModel();
         jTableMessages.setModel(defaultTableModel);
     }

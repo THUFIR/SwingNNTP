@@ -11,14 +11,11 @@ public enum EnumNNTP {
     private final Logger log = Logger.getLogger(EnumNNTP.class.getName());
     private Properties props = new Properties();
     private List<Message> messages = new ArrayList<Message>();
-    private Message message;
     private boolean loaded = false;
-    private int index = 0;   //hmmm, offset by two
     private Folder folder = null;
     private Folder root = null;
     private Store store = null;
-    private int min;
-    private int max;
+    private int size;
 
     private EnumNNTP() {
         log.info("SingletonNNTP..only once...");
@@ -32,11 +29,6 @@ public enum EnumNNTP {
         }
     }
 
-    public List<Message> getMessages(boolean debug) throws Exception {
-        log.info("SingletonNNTP.getMessages..");
-        return Collections.unmodifiableList(messages);
-    }
-
     private boolean connect() throws Exception {
         log.info("SingletonNNTP.connect..");
         Session session = Session.getDefaultInstance(props);
@@ -46,46 +38,24 @@ public enum EnumNNTP {
         root = store.getDefaultFolder();
         folder = root.getFolder(props.getProperty("nntp.group"));
         folder.open(Folder.READ_ONLY);
-        setIndex(folder.getMessageCount());
-        index = index + 10;
-        page(true);
+        setSize(folder.getMessageCount());
         return true;
     }
 
-    public Message getMessage() throws Exception {
-        log.info("SingletonNNTP.getMessage..");
-        for (Message m : messages) {
-            if (m.getMessageNumber() == index) {
-                message = m;
-                log.info("SingletonNNTP.getMessage found " + index);
-            }
+    public int getSize() {
+        return size;
+    }
+
+    private void setSize(int size) {
+        this.size = size;
+    }
+
+    public List<Message> getMessages(int start, int end) {
+        try {
+            messages = Arrays.asList(folder.getMessages(start, end));
+        } catch (MessagingException ex) {
+            Logger.getLogger(EnumNNTP.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return message;
-    }
-
-    public void page(boolean isBack) throws Exception {
-        log.log(Level.INFO, "SingletonNNTP.page..{0}", index);
-        int difference = isBack ? -10 : 10;
-        setIndex(index + difference);
-        Message[] msgs = folder.getMessages(index - 10, index);
-        messages = Arrays.asList(msgs);
-        Collections.reverse(messages);
-        message = messages.get(0);
-    }
-
-    public int getMin() {
-        return min;
-    }
-
-    public void setMin(int min) {
-        this.min = min;
-    }
-
-    public int getMax() {
-        return max;
-    }
-
-    public void setMax(int max) {
-        this.max = max;
+        return Collections.unmodifiableList(messages);
     }
 }

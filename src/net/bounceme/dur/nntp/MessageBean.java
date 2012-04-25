@@ -3,15 +3,16 @@ package net.bounceme.dur.nntp;
 import java.net.URL;
 import java.util.Date;
 import java.util.Vector;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Address;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 
 public class MessageBean {
 
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = Logger.getLogger(MessageBean.class.getName());
-    private String from;
     private Date sent;
     private String subject;
     private String content;
@@ -21,24 +22,16 @@ public class MessageBean {
     public MessageBean() {
     }
 
-    public MessageBean(Message message) throws Exception {
-        Address[] froms = message.getFrom();
-        setFrom(froms[0].toString());
-        setSent(message.getSentDate());
-        setSubject(message.getSubject());
-        setContent(message.getContent().toString());
-        vector.add(getFrom());
-        vector.add(getSent());
-        vector.add(getSubject());
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        LOG.info("MessageBean.setFrom.." + from);
-        this.from = from;
+    public MessageBean(Message message) {
+        try {
+            setSent(message.getSentDate());
+            setSubject(message.getSubject());
+            setContent(message.getContent().toString());
+            vector.add(getSent());
+            vector.add(getSubject());
+        } catch (Exception ex) {
+            Logger.getLogger(MessageBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Date getSent() {

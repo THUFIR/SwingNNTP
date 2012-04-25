@@ -15,23 +15,28 @@ public class MessageUtils {
     private static DefaultTableModel defaultTableModel = new DefaultTableModel();
     private static EnumNNTP nntp = EnumNNTP.INSTANCE;
     private static Vector messages = new Vector();
-    private static MessageBean messageBean = new MessageBean();
-    private static int min;
-    private static int max;
+    private static int pageSize = 10;
     private static int index;
+    private static int max;
 
-    public static void loadMessages() {
-        try {
-            List<Message> listOfMessages = nntp.getMessages(false);//nntp debug off
-            messages.clear();
-            for (Message m : listOfMessages) {
-                MessageBean messageBean = new MessageBean(m);
-                messages.add(messageBean);
+    public static void init() {
+        max = nntp.getSize();
+        index = max - 10;
+        loadMessages();
+    }
+
+    private static void loadMessages() {
+        List<Message> listOfMessages = nntp.getMessages(index - pageSize, index);
+        for (Message m : listOfMessages) {
+            MessageBean messageBean = null;
+            try {
+                messageBean = new MessageBean(m);
+            } catch (Exception ex) {
+                Logger.getLogger(MessageUtils.class.getName()).log(Level.SEVERE, null, ex);
             }
-            loadTableModel();
-        } catch (Exception ex) {
-            Logger.getLogger(MessageUtils.class.getName()).log(Level.SEVERE, null, ex);
+            messages.add(messageBean);
         }
+        loadTableModel();
     }
 
     private static void loadTableModel() {
@@ -73,45 +78,16 @@ public class MessageUtils {
         MessageUtils.messages = messages;
     }
 
-    public static MessageBean getMessageBean(int i) {
-        messageBean = (MessageBean) messages.elementAt(i);
+    public static MessageBean getMessageBean(int row) {
+        MessageBean messageBean = (MessageBean) messages.elementAt(row);
         return messageBean;
     }
 
-    public static void setMessageBean(MessageBean aMessageBean) {
-        messageBean = aMessageBean;
-    }
-
-    public static int getMin() {
-        return min;
-    }
-
-    public static void setMin(int aMin) {
-        min = aMin;
-    }
-
-    public static int getMax() {
-        return max;
-    }
-
-    public static void setMax(int aMax) {
-        max = aMax;
-    }
-
-    public static int getIndex() {
-        return index;
-    }
-
-    public static void setIndex(int aIndex) {
-        index = aIndex;
-    }
-
     public static void page(boolean isBack){
-        try {
-            nntp.page(isBack);
-        } catch (Exception ex) {
-            Logger.getLogger(MessageUtils.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        LOG.log(Level.INFO, "MessageUtils.page..");
+        index = isBack ? index - 10 : index + 10;
+        index = index < pageSize + 1 ? pageSize + 1 : index;  //to prevent negative pages
+        index = index > max ? max - pageSize : index;  //to prevent negative pages
+        loadMessages();
     }
-
 }
