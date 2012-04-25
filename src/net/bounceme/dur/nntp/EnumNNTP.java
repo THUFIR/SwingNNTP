@@ -63,16 +63,6 @@ public enum EnumNNTP {
         return message;
     }
 
-    public int getIndex() {
-        log.log(Level.INFO, "SingletonNNTP.getIndex..{0}", index);
-        return index;
-    }
-
-    public void setIndex(int index) throws Exception {
-        log.log(Level.INFO, "SingletonNNTP.setIndex..{0}", index);
-        this.index = index;
-    }
-
     public void page(boolean isBack) throws Exception {
         log.log(Level.INFO, "SingletonNNTP.page..{0}", index);
         int difference = isBack ? -10 : 10;
