@@ -15,6 +15,9 @@ public class MessageUtils {
     private static EnumNNTP nntp = EnumNNTP.INSTANCE;
     private static Vector messages = new Vector();
     private static MessageBean messageBean = new MessageBean();
+    private static int min;
+    private static int max;
+    private static int index;
 
     public static void loadMessages() throws Exception {
         List<Message> listOfMessages = nntp.getMessages(false);//nntp debug off
@@ -72,5 +75,29 @@ public class MessageUtils {
 
     public static void setMessageBean(MessageBean aMessageBean) {
         messageBean = aMessageBean;
+    }
+
+    public static int getMin() {
+        return min;
+    }
+
+    public static void setMin(int aMin) {
+        min = aMin;
+    }
+
+    public static int getMax() {
+        return max;
+    }
+
+    public static void setMax(int aMax) {
+        max = aMax;
+    }
+
+    public static int getIndex() {
+        return index;
+    }
+
+    public static void setIndex(int aIndex) {
+        index = aIndex;
     }
 }
