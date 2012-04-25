@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.bounceme.dur.nntp;
 
 import java.awt.Dimension;
@@ -13,10 +9,6 @@ import javax.swing.JTextPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author thufir
- */
 public class Simple {
 
     private static JFrame f = new JFrame();
