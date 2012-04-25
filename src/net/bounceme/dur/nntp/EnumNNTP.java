@@ -46,7 +46,6 @@ public enum EnumNNTP {
         root = store.getDefaultFolder();
         folder = root.getFolder(props.getProperty("nntp.group"));
         folder.open(Folder.READ_ONLY);
-
         setIndex(folder.getMessageCount());
         index = index + 10;
         page(true);
