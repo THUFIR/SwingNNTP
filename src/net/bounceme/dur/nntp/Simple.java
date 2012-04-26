@@ -1,13 +1,11 @@
 package net.bounceme.dur.nntp;
 
 //dummy
-
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import javax.swing.JFrame;
-import javax.swing.JSlider;
-import javax.swing.JTable;
-import javax.swing.JTextPane;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class Simple {
@@ -19,8 +17,8 @@ public class Simple {
     private static JTable table = new JTable();
 
     public static void main(String args[]) {
+        MessageUtils.init();
         table.setModel(dtm);
-
         table.addMouseListener(new java.awt.event.MouseAdapter() {
 
             @Override
@@ -29,6 +27,8 @@ public class Simple {
                 MessageBean mb = MessageUtils.getMessageBean(row);
                 text.setText(mb.getContent());
                 text.setContentType("text/html");
+                text.revalidate();
+                text.repaint();
             }
         });
 
@@ -41,18 +41,25 @@ public class Simple {
                 MessageUtils.setIndex(index);
                 dtm = MessageUtils.getDataTableModel();
                 table.setModel(dtm);
-
+                table.revalidate();
+                table.repaint();
                 f.revalidate();
                 f.repaint();
             }
         });
 
-        f.add(table);
-        f.add(text);
-        f.add(slider);
+        JPanel p = new JPanel();
+        p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+        p.add(table);
+        p.add(text);
+        p.add(slider);
+        f.add(p);
+        table.revalidate();
+        table.repaint();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         f.setSize(screenSize);
+        f.pack();
         f.setVisible(true);
     }
 }
