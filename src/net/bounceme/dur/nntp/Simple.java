@@ -9,18 +9,22 @@ import javax.swing.table.DefaultTableModel;
 
 public class Simple {
 
-    private static JFrame frame = new JFrame();
-    private static JTextPane text = new JTextPane();
-    private static JSlider slider = new JSlider();
-    private static MessagesController mc = new MessagesController();
-    private static DefaultTableModel dtm = mc.getDataTableModel();
-    private static JTable table = new JTable();
-
-    /*
-     * EventQueue.invokeLater(new Runnable() { /* your stuff here
-     */
     public static void main(String args[]) {
-        //EventQueue.invokeLater(new Runnable() {
+        F f = new F();
+    }
+}
+
+class F extends JFrame {
+    //EventQueue.invokeLater(new Runnable() {
+
+    JTextPane text = new JTextPane();
+    JSlider slider = new JSlider();
+    MessagesController mc = new MessagesController();
+    DefaultTableModel dtm = new DefaultTableModel();//mc.getDataTableModel();
+    JTable table = new JTable();
+
+    public F() {
+
 
         table.setModel(dtm);
 
@@ -45,10 +49,6 @@ public class Simple {
                 mc.setIndex(index);
                 dtm = mc.getDataTableModel();
                 table.setModel(dtm);
-                table.revalidate();
-                table.repaint();
-                frame.revalidate();
-                frame.repaint();
             }
         });
 
@@ -58,14 +58,13 @@ public class Simple {
         panel.add(table);
         panel.add(text);
         panel.add(slider);
-        frame.add(panel);
+        add(panel);
         table.revalidate();
         table.repaint();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.pack();
-        frame.setVisible(true);
-        frame.setSize(screenSize);
-        //}
+        pack();
+        setVisible(true);
+        setSize(screenSize);
     }
 }
