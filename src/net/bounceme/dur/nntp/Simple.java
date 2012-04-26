@@ -20,6 +20,8 @@ public class Simple {
     static JTable table = new JTable();
 
     private static void createAndShowGUI() {
+
+
         table.setModel(defaultTableModel);
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
@@ -50,8 +52,7 @@ public class Simple {
                         int index = slider.getValue();
                         LOG.info("slider index " + index);
                         messagesController.setIndex(index);
-                        defaultTableModel = messagesController.getDefaultTableModel();
-                        table.setModel(defaultTableModel);
+                        table.repaint();
                     }
                 });
             }
