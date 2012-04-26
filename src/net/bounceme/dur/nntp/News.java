@@ -30,7 +30,7 @@ public class News {
 
                     public void run() {
                         int row = table.convertRowIndexToModel(table.getSelectedRow());
-                        row = Math.abs(row);
+                        row = Math.abs(row);  //how can this be negative?
                         LOG.fine("row " + row);
                         MessageBean messageBean = messagesController.getMessageBean(row);
                         text.setText(messageBean.getContent());
@@ -40,9 +40,9 @@ public class News {
             }
         });
 
-        slider.setMinimum(messagesController.getMax() - 50);
+        slider.setMinimum(1);
         slider.setMaximum(messagesController.getMax());
-        slider.setValue(messagesController.getMax() - 30);
+        slider.setValue(messagesController.getMax());
         slider.addChangeListener(new javax.swing.event.ChangeListener() {
 
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
