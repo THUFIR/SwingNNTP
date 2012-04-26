@@ -1,11 +1,11 @@
 package net.bounceme.dur.nntp;
 
 //dummy
-import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class Simple {
@@ -19,11 +19,11 @@ public class Simple {
     public static void main(String args[]) {
         MessageUtils.init();
         table.setModel(dtm);
-        table.addMouseListener(new java.awt.event.MouseAdapter() {
 
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int row = table.rowAtPoint(evt.getPoint());
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+            public void valueChanged(ListSelectionEvent evt) {
+                int row = table.getSelectedRow();
                 MessageBean mb = MessageUtils.getMessageBean(row);
                 text.setText(mb.getContent());
                 text.setContentType("text/html");
@@ -47,6 +47,8 @@ public class Simple {
                 f.repaint();
             }
         });
+
+
 
         JPanel p = new JPanel();
         p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
