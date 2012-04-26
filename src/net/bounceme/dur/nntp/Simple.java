@@ -28,7 +28,8 @@ public class Simple {
 
                     public void run() {
                         int row = table.convertRowIndexToModel(table.getSelectedRow());
-                        LOG.info("selected row "+ row);
+                        row = Math.abs(row);
+                        LOG.info("Simple.creatAndShowGUI,table value changed, selected row "+ row);
                         MessageBean messageBean = messagesController.getMessageBean(row);
                         text.setText(messageBean.getContent());
                         text.setContentType("text/html");
@@ -49,7 +50,7 @@ public class Simple {
                         int index = slider.getValue();
                         LOG.info("slider index " + index);
                         messagesController.setIndex(index);
-                        defaultTableModel = messagesController.getDataTableModel();
+                        defaultTableModel = messagesController.getDefaultTableModel();
                         table.setModel(defaultTableModel);
                     }
                 });

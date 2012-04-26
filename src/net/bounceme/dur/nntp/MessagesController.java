@@ -1,8 +1,5 @@
 package net.bounceme.dur.nntp;
 
-
-//editing model directly
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -15,7 +12,7 @@ public class MessagesController {
 
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = Logger.getLogger(MessagesController.class.getName());
-    private DefaultTableModel defaultTableModel = new DefaultTableModel();
+    private DefaultTableModel dtm = new DefaultTableModel();
     private NewsServer nntp = new NewsServer();
     private Vector messages = new Vector();
     private int pageSize = 10;
@@ -29,13 +26,13 @@ public class MessagesController {
     }
 
     private void loadMessages() {
-        List<Message> listOfMessages = nntp.getMessages(getIndex() - pageSize, getIndex());
-        for (Message m : listOfMessages) {
+        List<Message> listOfMessages = nntp.getMessages(getIndex() - getPageSize(), getIndex());
+        for (Message message : listOfMessages) {
             MessageBean messageBean = null;
             try {
-                messageBean = new MessageBean(m);
+                messageBean = new MessageBean(message);
             } catch (Exception ex) {
-                Logger.getLogger(MessagesController.class.getName()).log(Level.SEVERE, null, ex);
+                LOG.log(Level.INFO, "MessagesController.loadMessages..could not populate messageBean {0}", ex);
             }
             messages.add(messageBean);
         }
@@ -43,18 +40,18 @@ public class MessagesController {
     }
 
     private void loadTableModel() {
-        defaultTableModel = new DefaultTableModel();
-        defaultTableModel.addColumn("sent");
-        defaultTableModel.addColumn("subject");
+        dtm = new DefaultTableModel();
+        dtm.addColumn("sent");
+        dtm.addColumn("subject");
         for (Object o : messages) {  //awkward Vector manipulation
             MessageBean messageBean = (MessageBean) o;
             Vector messageBeanAsVector = messageBean.getVector();
-            defaultTableModel.addRow(messageBeanAsVector);
+            dtm.addRow(messageBeanAsVector);
         }
     }
 
-    public DefaultTableModel getDataTableModel() {
-        Vector vector = defaultTableModel.getDataVector();
+    public DefaultTableModel getDefaultTableModel() {
+        Vector vector = dtm.getDataVector();
         Iterator it = vector.iterator();
         while (it.hasNext()) {
             Vector v = (Vector) it.next();
@@ -63,13 +60,13 @@ public class MessagesController {
             while (i.hasNext()) {
                 row.append(i.next());
             }
-            LOG.info(row.toString());
+            //LOG.info(row.toString());
         }
-        return defaultTableModel;
+        return dtm;
     }
 
-    public void setDataTableModel(DefaultTableModel dataTableModel) {
-        this.defaultTableModel = dataTableModel;
+    public void setDefaultTableModel(DefaultTableModel dataTableModel) {
+        this.dtm = dataTableModel;
     }
 
     public Vector getMessages() {
@@ -86,21 +83,13 @@ public class MessagesController {
     }
 
     public int getIndex() {
+        LOG.log(Level.INFO, "MessagesController.getIndex..{0}", index);
         return index;
     }
 
-    public void setIndex(int aIndex) {
-        LOG.log(Level.INFO, "MessageUtils.setIndex..trying {0}", aIndex);
-        if (aIndex < pageSize + 1) {  //goldilocks check on aIndex
-            aIndex = pageSize + 1;
-            LOG.log(Level.INFO, "too small, setting default..{0}", aIndex);
-        } else if (aIndex >= getMax() - pageSize) {
-            aIndex = getMax() - pageSize;
-            LOG.log(Level.INFO, "too big, setting default..{0}", aIndex);
-        } else {
-            LOG.log(Level.INFO, "just right, setting..{0}", aIndex);
-        }
-        index = aIndex;
+    public void setIndex(int index) {
+        LOG.log(Level.INFO, "MessagesController.setIndex..to {0}", index);
+        this.index = index;
         loadMessages();
     }
 
@@ -108,7 +97,15 @@ public class MessagesController {
         return max;
     }
 
-    public void setMax(int aMax) {
-        max = aMax;
+    public void setMax(int max) {
+        this.max = max;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }
