@@ -58,7 +58,7 @@ public class Simple {
 
         slider.setMinimum(messagesController.getMax() - 50);
         slider.setMaximum(messagesController.getMax());
-        slider.setValue(messagesController.getMax());
+        slider.setValue(messagesController.getMax() - 30);
         slider.addChangeListener(new javax.swing.event.ChangeListener() {
 
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -68,15 +68,15 @@ public class Simple {
                         int index = slider.getValue();
                         LOG.info("slider index " + index);
                         messagesController.setIndex(index);
+                        dtm = messagesController.getDefaultTableModel();
                         table.setModel(dtm);
-                        logModel();
+                        //logModel();
                         table.repaint();
                         table.revalidate();
                     }
                 });
             }
         });
-
         table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getSelectionModel().setSelectionInterval(1, 1);
         JPanel panel = new JPanel();
