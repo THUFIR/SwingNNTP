@@ -17,7 +17,7 @@ public class NewsServer {
     private int size;
 
     public NewsServer() {
-        LOG.info("SingletonNNTP..only once...");
+        LOG.fine("SingletonNNTP..only once...");
         props = PropertiesReader.getProps();
         if (!loaded) {
             try {
@@ -29,7 +29,7 @@ public class NewsServer {
     }
 
     private boolean connect() throws Exception {
-        LOG.info("SingletonNNTP.connect..");
+        LOG.fine("SingletonNNTP.connect..");
         Session session = Session.getDefaultInstance(props);
         session.setDebug(false);
         store = session.getStore(new URLName(props.getProperty("nntp.host")));
@@ -50,14 +50,14 @@ public class NewsServer {
     }
 
     private void logMessages() throws MessagingException {
-        LOG.info("NewsServer.logMessages..");
+        LOG.fine("NewsServer.logMessages..");
         for (Message m : messages) {
             LOG.log(Level.FINER, "***** {0}  {1}", new Object[]{m.getMessageNumber(), m.getSubject()});
         }
     }
 
     public List<Message> getMessages(int start, int end) {
-        LOG.log(Level.INFO, "NewsServer.getMessages {0} {1}", new Object[]{start, end});
+        LOG.log(Level.FINE, "NewsServer.getMessages {0} {1}", new Object[]{start, end});
         try {
             messages = Arrays.asList(folder.getMessages(start, end));
             logMessages();
