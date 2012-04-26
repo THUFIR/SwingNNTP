@@ -32,11 +32,12 @@ public class Simple {
             while (i.hasNext()) {
                 row.append(i.next());
             }
-            LOG.fine(row.toString());
+            LOG.info(row.toString());
         }
     }
 
     private static void createAndShowGUI() {
+        dtm = messagesController.getDefaultTableModel();
         table.setModel(dtm);
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
@@ -68,7 +69,7 @@ public class Simple {
                         LOG.info("slider index " + index);
                         messagesController.setIndex(index);
                         table.setModel(dtm);
-                        //logModel();
+                        logModel();
                         table.repaint();
                         table.revalidate();
                     }
