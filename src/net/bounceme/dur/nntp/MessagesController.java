@@ -8,38 +8,56 @@ import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.swing.table.DefaultTableModel;
 
-public class MessageUtils {
+public class MessagesController {
 
     private static final long serialVersionUID = 1L;
-    private static final Logger LOG = Logger.getLogger(MessageUtils.class.getName());
-    private static DefaultTableModel defaultTableModel = new DefaultTableModel();
-    private static EnumNNTP nntp = EnumNNTP.INSTANCE;
-    private static Vector messages = new Vector();
-    private static int pageSize = 10;
-    private static int index;
-    private static int max;
+    private static final Logger LOG = Logger.getLogger(MessagesController.class.getName());
+    private DefaultTableModel defaultTableModel = new DefaultTableModel();
+    private NewsServer nntp = new NewsServer();
+    private Vector messages = new Vector();
+    private int pageSize = 10;
+    private int index;
+    private int max;
 
-    public static void init() {
+    void mutate(Object[] obj) {
+        obj[0] = "test";
+        obj = new Object[]{"nope"};
+    }
+
+    void main() {
+        Object[] obj = new Object[1];
+        System.out.println(obj[0]);
+        /*
+         * prints: null
+         */
+        mutate(obj);
+        System.out.println(obj[0]);
+        /*
+         * prints: "test"
+         */
+    }
+
+    public MessagesController() {
         setMax(nntp.getSize());
         setIndex(getMax() - 10);
         loadMessages();
     }
 
-    private static void loadMessages() {
+    private void loadMessages() {
         List<Message> listOfMessages = nntp.getMessages(getIndex() - pageSize, getIndex());
         for (Message m : listOfMessages) {
             MessageBean messageBean = null;
             try {
                 messageBean = new MessageBean(m);
             } catch (Exception ex) {
-                Logger.getLogger(MessageUtils.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MessagesController.class.getName()).log(Level.SEVERE, null, ex);
             }
             messages.add(messageBean);
         }
         loadTableModel();
     }
 
-    private static void loadTableModel() {
+    private void loadTableModel() {
         defaultTableModel = new DefaultTableModel();
         defaultTableModel.addColumn("sent");
         defaultTableModel.addColumn("subject");
@@ -50,7 +68,7 @@ public class MessageUtils {
         }
     }
 
-    public static DefaultTableModel getDataTableModel() {
+    public DefaultTableModel getDataTableModel() {
         Vector vector = defaultTableModel.getDataVector();
         Iterator it = vector.iterator();
         while (it.hasNext()) {
@@ -65,28 +83,28 @@ public class MessageUtils {
         return defaultTableModel;
     }
 
-    public static void setDataTableModel(DefaultTableModel dataTableModel) {
-        MessageUtils.defaultTableModel = dataTableModel;
+    public void setDataTableModel(DefaultTableModel dataTableModel) {
+        this.defaultTableModel = dataTableModel;
     }
 
-    public static Vector getMessages() {
+    public Vector getMessages() {
         return messages;
     }
 
-    public static void setMessages(Vector messages) {
-        MessageUtils.messages = messages;
+    public void setMessages(Vector messages) {
+        this.messages = messages;
     }
 
-    public static MessageBean getMessageBean(int row) {
+    public MessageBean getMessageBean(int row) {
         MessageBean messageBean = (MessageBean) messages.elementAt(row);
         return messageBean;
     }
 
-    public static int getIndex() {
+    public int getIndex() {
         return index;
     }
 
-    public static void setIndex(int aIndex) {
+    public void setIndex(int aIndex) {
         LOG.log(Level.INFO, "MessageUtils.setIndex..trying {0}", aIndex);
         if (aIndex < pageSize + 1) {  //goldilocks check on aIndex
             aIndex = pageSize + 1;
@@ -101,11 +119,11 @@ public class MessageUtils {
         loadMessages();
     }
 
-    public static int getMax() {
+    public int getMax() {
         return max;
     }
 
-    public static void setMax(int aMax) {
+    public void setMax(int aMax) {
         max = aMax;
     }
 }
