@@ -27,7 +27,8 @@ public class Simple {
                 java.awt.EventQueue.invokeLater(new Runnable() {
 
                     public void run() {
-                        int row = table.getSelectedRow();
+                        int row = table.convertRowIndexToModel(table.getSelectedRow());
+                        LOG.info("selected row "+ row);
                         MessageBean messageBean = messagesController.getMessageBean(row);
                         text.setText(messageBean.getContent());
                         text.setContentType("text/html");
