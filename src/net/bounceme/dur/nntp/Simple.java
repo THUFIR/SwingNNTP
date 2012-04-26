@@ -1,6 +1,7 @@
 package net.bounceme.dur.nntp;
 
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -9,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class Simple {
 
-    static JFrame f = new JFrame();
+    static JFrame frame = new JFrame();
     static JTextPane text = new JTextPane();
     static JSlider slider = new JSlider();
     static MessagesController mc = new MessagesController();
@@ -17,10 +18,7 @@ public class Simple {
     static JTable table = new JTable();
 
     private static void createAndShowGUI() {
-
-
         table.setModel(dtm);
-
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent evt) {
@@ -47,18 +45,18 @@ public class Simple {
 
         table.getSelectionModel().setSelectionInterval(1, 1);
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setLayout(new GridLayout(3,1));
         panel.add(table);
         panel.add(text);
         panel.add(slider);
-        f.add(panel);
+        frame.add(panel);
         table.revalidate();
         table.repaint();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        f.pack();
-        f.setVisible(true);
-        f.setSize(screenSize);
+        frame.pack();
+        frame.setVisible(true);
+        frame.setSize(screenSize);
 
 
     }
