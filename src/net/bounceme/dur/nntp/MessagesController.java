@@ -13,7 +13,7 @@ public class MessagesController {
 
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = Logger.getLogger(MessagesController.class.getName());
-    private DefaultTableModel dtm = new DefaultTableModel();
+    private DefaultTableModel defaultTableModel = new DefaultTableModel();
     private NewsServer nntp = new NewsServer();
     private List<Message> messages = new ArrayList<Message>();
     private int pageSize = 10;
@@ -27,21 +27,21 @@ public class MessagesController {
     }
 
     private void loadTableModel() {
-        List<Message> messages = nntp.getMessages(getIndex() - getPageSize(), getIndex());
-        dtm = null;
-        dtm = new DefaultTableModel();
+        messages = nntp.getMessages(getIndex() - getPageSize(), getIndex());
+        DefaultTableModel dtm = new DefaultTableModel();
         dtm.addColumn("sent");
         dtm.addColumn("subject");
         for (Message message : messages) {
             MessageBean messageBean = new MessageBean(message);
-            LOG.fine("MessagesController.loadTableModel.." + messageBean.toString());
+            LOG.finest("MessagesController.loadTableModel.." + messageBean.toString());
             Vector messageBeanAsVector = messageBean.getVector();
             dtm.addRow(messageBeanAsVector);
         }
+        setDefaultTableModel(dtm);
     }
 
-    public DefaultTableModel getDefaultTableModel() {
-        Vector vector = dtm.getDataVector();
+    public void logModel() {
+        Vector vector = defaultTableModel.getDataVector();
         Iterator it = vector.iterator();
         while (it.hasNext()) {
             Vector v = (Vector) it.next();
@@ -50,13 +50,18 @@ public class MessagesController {
             while (i.hasNext()) {
                 row.append(i.next());
             }
-            LOG.info(row.toString());
+            LOG.finer(row.toString());
         }
-        return dtm;
+    }
+
+    public DefaultTableModel getDefaultTableModel() {
+        return defaultTableModel;
     }
 
     public void setDefaultTableModel(DefaultTableModel dataTableModel) {
-        this.dtm = dataTableModel;
+        LOG.info("MessagesController.setDefaultTableModel..");
+        this.defaultTableModel = dataTableModel;
+        logModel();
     }
 
     public MessageBean getMessageBean(int row) {

@@ -49,9 +49,18 @@ public class NewsServer {
         this.size = size;
     }
 
+    private void logMessages() throws MessagingException {
+        LOG.info("NewsServer.logMessages..");
+        for (Message m : messages) {
+            LOG.log(Level.INFO, "***** {0}  {1}", new Object[]{m.getMessageNumber(), m.getSubject()});
+        }
+    }
+
     public List<Message> getMessages(int start, int end) {
+        LOG.log(Level.INFO, "NewsServer.getMessages {0} {1}", new Object[]{start, end});
         try {
             messages = Arrays.asList(folder.getMessages(start, end));
+            logMessages();
         } catch (MessagingException ex) {
             Logger.getLogger(NewsServer.class.getName()).log(Level.SEVERE, null, ex);
         }
