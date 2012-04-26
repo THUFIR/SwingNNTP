@@ -1,5 +1,7 @@
 package net.bounceme.dur.nntp;
 
+//dummy
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
@@ -39,7 +41,7 @@ public class Simple {
                 MessageUtils.setIndex(index);
                 dtm = MessageUtils.getDataTableModel();
                 table.setModel(dtm);
-                
+
                 f.revalidate();
                 f.repaint();
             }
