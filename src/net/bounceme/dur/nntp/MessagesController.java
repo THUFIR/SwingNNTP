@@ -1,5 +1,6 @@
 package net.bounceme.dur.nntp;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -14,7 +15,7 @@ public class MessagesController {
     private static final Logger LOG = Logger.getLogger(MessagesController.class.getName());
     private DefaultTableModel dtm = new DefaultTableModel();
     private NewsServer nntp = new NewsServer();
-    private Vector messages = new Vector();
+    private List<Message> messages = new ArrayList<Message>();
     private int pageSize = 10;
     private int index;
     private int max;
@@ -22,29 +23,18 @@ public class MessagesController {
     public MessagesController() {
         setMax(nntp.getSize() - 10);
         setIndex(getMax() - 10);
-        loadMessages();
-    }
-
-    private void loadMessages() {
-        List<Message> listOfMessages = nntp.getMessages(getIndex() - getPageSize(), getIndex());
-        for (Message message : listOfMessages) {
-            MessageBean messageBean = null;
-            try {
-                messageBean = new MessageBean(message);
-            } catch (Exception ex) {
-                LOG.log(Level.INFO, "MessagesController.loadMessages..could not populate messageBean {0}", ex);
-            }
-            messages.add(messageBean);
-        }
         loadTableModel();
     }
 
     private void loadTableModel() {
+        List<Message> messages = nntp.getMessages(getIndex() - getPageSize(), getIndex());
+        dtm = null;
         dtm = new DefaultTableModel();
         dtm.addColumn("sent");
         dtm.addColumn("subject");
-        for (Object o : messages) {  //awkward Vector manipulation
-            MessageBean messageBean = (MessageBean) o;
+        for (Message message : messages) {
+            MessageBean messageBean = new MessageBean(message);
+            LOG.fine("MessagesController.loadTableModel.." + messageBean.toString());
             Vector messageBeanAsVector = messageBean.getVector();
             dtm.addRow(messageBeanAsVector);
         }
@@ -60,7 +50,7 @@ public class MessagesController {
             while (i.hasNext()) {
                 row.append(i.next());
             }
-            //LOG.info(row.toString());
+            LOG.info(row.toString());
         }
         return dtm;
     }
@@ -69,16 +59,9 @@ public class MessagesController {
         this.dtm = dataTableModel;
     }
 
-    public Vector getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Vector messages) {
-        this.messages = messages;
-    }
-
     public MessageBean getMessageBean(int row) {
-        MessageBean messageBean = (MessageBean) messages.elementAt(row);
+        Message message = messages.get(row);
+        MessageBean messageBean = new MessageBean(message);
         return messageBean;
     }
 
@@ -90,7 +73,7 @@ public class MessagesController {
     public void setIndex(int index) {
         LOG.log(Level.INFO, "MessagesController.setIndex..to {0}", index);
         this.index = index;
-        loadMessages();
+        loadTableModel();
     }
 
     public int getMax() {

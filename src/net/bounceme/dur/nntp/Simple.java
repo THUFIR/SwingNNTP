@@ -68,7 +68,7 @@ public class Simple {
                         LOG.info("slider index " + index);
                         messagesController.setIndex(index);
                         table.setModel(dtm);
-                        logModel();
+                        //logModel();
                         table.repaint();
                         table.revalidate();
                     }

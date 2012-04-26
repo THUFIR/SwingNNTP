@@ -73,4 +73,9 @@ public class MessageBean {
     public void setVector(Vector vector) {
         this.vector = vector;
     }
+
+    @Override
+    public String toString(){
+        return getSubject();
+    }
 }
