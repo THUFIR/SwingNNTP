@@ -3,17 +3,15 @@ package net.bounceme.dur.nntp;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.util.Iterator;
-import java.util.Vector;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-public class Simple {
+public class News {
 
-    private static final Logger LOG = Logger.getLogger(Simple.class.getName());
+    private static final Logger LOG = Logger.getLogger(News.class.getName());
     static JFrame frame = new JFrame();
     static JTextPane text = new JTextPane();
     static JSlider slider = new JSlider();
