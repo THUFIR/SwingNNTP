@@ -52,7 +52,7 @@ public class NewsServer {
     private void logMessages() throws MessagingException {
         LOG.info("NewsServer.logMessages..");
         for (Message m : messages) {
-            LOG.log(Level.INFO, "***** {0}  {1}", new Object[]{m.getMessageNumber(), m.getSubject()});
+            LOG.log(Level.FINER, "***** {0}  {1}", new Object[]{m.getMessageNumber(), m.getSubject()});
         }
     }
 

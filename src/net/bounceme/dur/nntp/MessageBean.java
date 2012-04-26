@@ -67,6 +67,7 @@ public class MessageBean {
     }
 
     public Vector getVector() {
+        LOG.fine(toString());
         return vector;
     }
 

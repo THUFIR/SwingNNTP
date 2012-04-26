@@ -33,7 +33,6 @@ public class MessagesController {
         dtm.addColumn("subject");
         for (Message message : messages) {
             MessageBean messageBean = new MessageBean(message);
-            LOG.finest("MessagesController.loadTableModel.." + messageBean.toString());
             Vector messageBeanAsVector = messageBean.getVector();
             dtm.addRow(messageBeanAsVector);
         }
@@ -50,7 +49,7 @@ public class MessagesController {
             while (i.hasNext()) {
                 row.append(i.next());
             }
-            LOG.finer(row.toString());
+            LOG.fine(row.toString());
         }
     }
 
@@ -59,7 +58,6 @@ public class MessagesController {
     }
 
     public void setDefaultTableModel(DefaultTableModel dataTableModel) {
-        LOG.info("MessagesController.setDefaultTableModel..");
         this.defaultTableModel = dataTableModel;
         logModel();
     }
@@ -71,12 +69,12 @@ public class MessagesController {
     }
 
     public int getIndex() {
-        LOG.log(Level.INFO, "MessagesController.getIndex..{0}", index);
+        LOG.info(String.valueOf(index));
         return index;
     }
 
     public void setIndex(int index) {
-        LOG.log(Level.INFO, "MessagesController.setIndex..to {0}", index);
+        LOG.log(Level.INFO, "trying {0}", index);
         this.index = index;
         loadTableModel();
     }
