@@ -18,27 +18,12 @@ public class Simple {
     static JTextPane text = new JTextPane();
     static JSlider slider = new JSlider();
     static MessagesController messagesController = new MessagesController();
-    static DefaultTableModel dtm = new DefaultTableModel();
+    static DefaultTableModel defaultTableModel = new DefaultTableModel();
     static JTable table = new JTable();
 
-    private static void logModel() {
-        Vector vector = dtm.getDataVector();
-        Iterator it = vector.iterator();
-        LOG.warning("logging rows from JFrame");
-        while (it.hasNext()) {
-            Vector v = (Vector) it.next();
-            Iterator i = v.iterator();
-            StringBuilder row = new StringBuilder();
-            while (i.hasNext()) {
-                row.append(i.next());
-            }
-            LOG.info(row.toString());
-        }
-    }
-
     private static void createAndShowGUI() {
-        dtm = messagesController.getDefaultTableModel();
-        table.setModel(dtm);
+        defaultTableModel = messagesController.getDefaultTableModel();
+        table.setModel(defaultTableModel);
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent evt) {
@@ -68,11 +53,8 @@ public class Simple {
                         int index = slider.getValue();
                         LOG.info("slider index " + index);
                         messagesController.setIndex(index);
-                        dtm = messagesController.getDefaultTableModel();
-                        table.setModel(dtm);
-                        //logModel();
-                        table.repaint();
-                        table.revalidate();
+                        defaultTableModel = messagesController.getDefaultTableModel();
+                        table.setModel(defaultTableModel);
                     }
                 });
             }
@@ -90,8 +72,6 @@ public class Simple {
         frame.pack();
         frame.setVisible(true);
         frame.setSize(screenSize);
-
-
     }
 
     public static void main(String args[]) {
