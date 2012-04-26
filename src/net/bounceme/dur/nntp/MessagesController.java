@@ -69,12 +69,12 @@ public class MessagesController {
     }
 
     public int getIndex() {
-        LOG.info(String.valueOf(index));
+        LOG.fine(String.valueOf(index));
         return index;
     }
 
     public void setIndex(int index) {
-        LOG.log(Level.INFO, "trying {0}", index);
+        LOG.log(Level.FINE, "trying {0}", index);
         this.index = index;
         loadTableModel();
     }

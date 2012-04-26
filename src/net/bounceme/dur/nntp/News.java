@@ -22,6 +22,7 @@ public class News {
     private static void createAndShowGUI() {
         defaultTableModel = messagesController.getDefaultTableModel();
         table.setModel(defaultTableModel);
+        table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent evt) {
@@ -30,7 +31,7 @@ public class News {
                     public void run() {
                         int row = table.convertRowIndexToModel(table.getSelectedRow());
                         row = Math.abs(row);
-                        LOG.info("Simple.creatAndShowGUI,table value changed, selected row " + row);
+                        LOG.fine("row " + row);
                         MessageBean messageBean = messagesController.getMessageBean(row);
                         text.setText(messageBean.getContent());
                         text.setContentType("text/html");
@@ -49,15 +50,15 @@ public class News {
 
                     public void run() {
                         int index = slider.getValue();
-                        LOG.info("slider index " + index);
+                        LOG.fine("slider " + index);
                         messagesController.setIndex(index);
                         defaultTableModel = messagesController.getDefaultTableModel();
                         table.setModel(defaultTableModel);
+                        table.getSelectionModel().setSelectionInterval(1, 1);
                     }
                 });
             }
         });
-        table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getSelectionModel().setSelectionInterval(1, 1);
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 1));
