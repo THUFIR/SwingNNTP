@@ -3,6 +3,8 @@ package net.bounceme.dur.nntp;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.util.Iterator;
+import java.util.Vector;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -16,13 +18,26 @@ public class Simple {
     static JTextPane text = new JTextPane();
     static JSlider slider = new JSlider();
     static MessagesController messagesController = new MessagesController();
-    static DefaultTableModel defaultTableModel = new DefaultTableModel();
+    static DefaultTableModel dtm = new DefaultTableModel();
     static JTable table = new JTable();
 
+    private static void logModel() {
+        Vector vector = dtm.getDataVector();
+        Iterator it = vector.iterator();
+        LOG.warning("logging rows from JFrame");
+        while (it.hasNext()) {
+            Vector v = (Vector) it.next();
+            Iterator i = v.iterator();
+            StringBuilder row = new StringBuilder();
+            while (i.hasNext()) {
+                row.append(i.next());
+            }
+            LOG.fine(row.toString());
+        }
+    }
+
     private static void createAndShowGUI() {
-
-
-        table.setModel(defaultTableModel);
+        table.setModel(dtm);
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent evt) {
@@ -31,7 +46,7 @@ public class Simple {
                     public void run() {
                         int row = table.convertRowIndexToModel(table.getSelectedRow());
                         row = Math.abs(row);
-                        LOG.info("Simple.creatAndShowGUI,table value changed, selected row "+ row);
+                        LOG.info("Simple.creatAndShowGUI,table value changed, selected row " + row);
                         MessageBean messageBean = messagesController.getMessageBean(row);
                         text.setText(messageBean.getContent());
                         text.setContentType("text/html");
@@ -52,7 +67,10 @@ public class Simple {
                         int index = slider.getValue();
                         LOG.info("slider index " + index);
                         messagesController.setIndex(index);
+                        table.setModel(dtm);
+                        logModel();
                         table.repaint();
+                        table.revalidate();
                     }
                 });
             }
