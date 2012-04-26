@@ -9,21 +9,14 @@ import javax.swing.table.DefaultTableModel;
 
 public class Simple {
 
-    public static void main(String args[]) {
-        F f = new F();
-    }
-}
+    static JFrame f = new JFrame();
+    static JTextPane text = new JTextPane();
+    static JSlider slider = new JSlider();
+    static MessagesController mc = new MessagesController();
+    static DefaultTableModel dtm = new DefaultTableModel();//mc.getDataTableModel();
+    static JTable table = new JTable();
 
-class F extends JFrame {
-    //EventQueue.invokeLater(new Runnable() {
-
-    JTextPane text = new JTextPane();
-    JSlider slider = new JSlider();
-    MessagesController mc = new MessagesController();
-    DefaultTableModel dtm = new DefaultTableModel();//mc.getDataTableModel();
-    JTable table = new JTable();
-
-    public F() {
+    private static void createAndShowGUI() {
 
 
         table.setModel(dtm);
@@ -58,13 +51,24 @@ class F extends JFrame {
         panel.add(table);
         panel.add(text);
         panel.add(slider);
-        add(panel);
+        f.add(panel);
         table.revalidate();
         table.repaint();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        pack();
-        setVisible(true);
-        setSize(screenSize);
+        f.pack();
+        f.setVisible(true);
+        f.setSize(screenSize);
+
+
+    }
+
+    public static void main(String args[]) {
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+
+            public void run() {
+                createAndShowGUI();
+            }
+        });
     }
 }
