@@ -1,5 +1,8 @@
 package net.bounceme.dur.nntp;
 
+
+//editing model directly
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -19,26 +22,8 @@ public class MessagesController {
     private int index;
     private int max;
 
-    void mutate(Object[] obj) {
-        obj[0] = "test";
-        obj = new Object[]{"nope"};
-    }
-
-    void main() {
-        Object[] obj = new Object[1];
-        System.out.println(obj[0]);
-        /*
-         * prints: null
-         */
-        mutate(obj);
-        System.out.println(obj[0]);
-        /*
-         * prints: "test"
-         */
-    }
-
     public MessagesController() {
-        setMax(nntp.getSize());
+        setMax(nntp.getSize() - 10);
         setIndex(getMax() - 10);
         loadMessages();
     }
