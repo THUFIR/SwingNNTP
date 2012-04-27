@@ -13,7 +13,7 @@ public class MessagesController {
 
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = Logger.getLogger(MessagesController.class.getName());
-    private DefaultTableModel defaultTableModel = new DefaultTableModel();
+    private DefaultTableModel defaultTableModel = null;
     private NewsServer nntp = new NewsServer();
     private List<Message> messages = new ArrayList<Message>();
     private int pageSize = 10;
@@ -39,8 +39,8 @@ public class MessagesController {
         setDefaultTableModel(dtm);
     }
 
-    public void logModel() {
-        Vector vector = defaultTableModel.getDataVector();
+    public void logModel(DefaultTableModel dtm) {
+        Vector vector = dtm.getDataVector();
         Iterator it = vector.iterator();
         while (it.hasNext()) {
             Vector v = (Vector) it.next();
@@ -57,9 +57,10 @@ public class MessagesController {
         return defaultTableModel;
     }
 
-    public void setDefaultTableModel(DefaultTableModel dataTableModel) {
-        this.defaultTableModel = dataTableModel;
-        logModel();
+    public void setDefaultTableModel(DefaultTableModel defaultTableModel) {
+        logModel(defaultTableModel);
+        this.defaultTableModel = defaultTableModel;
+        defaultTableModel.fireTableDataChanged();
     }
 
     public MessageBean getMessageBean(int row) {

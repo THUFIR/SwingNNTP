@@ -26,37 +26,26 @@ public class News {
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent evt) {
-                java.awt.EventQueue.invokeLater(new Runnable() {
-
-                    public void run() {
-                        int row = table.convertRowIndexToModel(table.getSelectedRow());
-                        row = Math.abs(row);  //how can this be negative?
-                        LOG.fine("row " + row);
-                        MessageBean messageBean = messagesController.getMessageBean(row);
-                        text.setText(messageBean.getContent());
-                        text.setContentType("text/html");
-                    }
-                });
+                int row = table.convertRowIndexToModel(table.getSelectedRow());
+                row = Math.abs(row);  //how can this be negative?
+                LOG.fine("row " + row);
+                MessageBean messageBean = messagesController.getMessageBean(row);
+                text.setText(messageBean.getContent());
+                text.setContentType("text/html");
             }
         });
-
         slider.setMinimum(1);
         slider.setMaximum(messagesController.getMax());
         slider.setValue(messagesController.getMax());
         slider.addChangeListener(new javax.swing.event.ChangeListener() {
 
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                java.awt.EventQueue.invokeLater(new Runnable() {
-
-                    public void run() {
-                        int index = slider.getValue();
-                        LOG.fine("slider " + index);
-                        messagesController.setIndex(index);
-                        defaultTableModel = messagesController.getDefaultTableModel();
-                        table.setModel(defaultTableModel);
-                        table.getSelectionModel().setSelectionInterval(1, 1);
-                    }
-                });
+                int index = slider.getValue();
+                LOG.fine("slider " + index);
+                messagesController.setIndex(index);
+                defaultTableModel = messagesController.getDefaultTableModel();
+                table.setModel(defaultTableModel);
+                table.getSelectionModel().setSelectionInterval(1, 1);
             }
         });
         table.getSelectionModel().setSelectionInterval(1, 1);
