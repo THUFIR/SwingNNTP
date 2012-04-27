@@ -1,5 +1,7 @@
 package net.bounceme.dur.nntp;
 
+//merging
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
