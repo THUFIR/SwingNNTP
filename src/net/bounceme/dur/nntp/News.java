@@ -2,6 +2,8 @@ package net.bounceme.dur.nntp;
 
 //merging to master
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -49,22 +51,34 @@ public class News {
             }
         });
 
-        JButton add = new JButton("note");
+        JButton button1 = new JButton("note");
+
+        button1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                int row = table.getSelectedRow();
+                MessageBean messageBean = messagesController.getMessageBean(row);
+                int i = messageBean.getId();
+                String s = messagesController.getNote(i);
+            }
+        });
+
         JEditorPane note = new JEditorPane();
         note.setSize(50, 500);
         note.setText("foo");
         JPanel p = new JPanel();
-        p.add(note,BorderLayout.CENTER);
-        p.add(add,BorderLayout.SOUTH);
+        p.add(note, BorderLayout.CENTER);
+        p.add(button1, BorderLayout.SOUTH);
         frame.add(table, BorderLayout.WEST);
         frame.add(text, BorderLayout.CENTER);
         frame.add(p, BorderLayout.EAST);
         frame.add(slider, BorderLayout.SOUTH);
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
         frame.pack();
-        frame.setVisible(true);
+
+        frame.setVisible(
+                true);
         frame.setSize(screenSize);
     }
 

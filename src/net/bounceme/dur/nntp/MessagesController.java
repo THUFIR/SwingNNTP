@@ -27,7 +27,6 @@ public class MessagesController {
     private void loadTableModel() {
         messages = nntp.getMessages(getIndex() - getPageSize(), getIndex());
         DefaultTableModel dtm = new DefaultTableModel();
-        dtm.addColumn("sent");
         dtm.addColumn("subject");
         for (Message message : messages) {
             MessageBean messageBean = new MessageBean(message);

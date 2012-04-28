@@ -17,6 +17,7 @@ public class MessageBean {
     private String subject;
     private String content;
     private URL link;
+    private int id;
     private Vector vector = new Vector();
 
     public MessageBean() {
@@ -27,8 +28,8 @@ public class MessageBean {
             setSent(message.getSentDate());
             setSubject(message.getSubject());
             setContent(message.getContent().toString());
+            setId(message.getMessageNumber());
             vector.add(getSent());
-            vector.add(getSubject());
         } catch (Exception ex) {
             Logger.getLogger(MessageBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,5 +79,13 @@ public class MessageBean {
     @Override
     public String toString(){
         return getSubject();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
