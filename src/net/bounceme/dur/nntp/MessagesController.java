@@ -1,9 +1,6 @@
 package net.bounceme.dur.nntp;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
@@ -16,9 +13,10 @@ public class MessagesController {
     private DefaultTableModel defaultTableModel = null;
     private NewsServer nntp = new NewsServer();
     private List<Message> messages = new ArrayList<Message>();
-    private int pageSize = 10;
+    private int pageSize = 35;
     private int index;
     private int max;
+    private Map<Integer,String> notes = new HashMap<Integer,String>();
 
     public MessagesController() {
         setMax(nntp.getSize() - 10);
@@ -94,5 +92,27 @@ public class MessagesController {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public Map<Integer,String> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Map<Integer,String> notes) {
+        this.notes = notes;
+    }
+
+    public void addNote(Integer i,String s) {
+        notes.put(i,s);
+    }
+
+    public String getNote(int i){
+        String s = null;
+        try {
+            s = notes.get(i);
+        } catch (Exception e) {
+            s = "no note yet";
+        }
+        return s;
     }
 }

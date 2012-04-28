@@ -49,8 +49,16 @@ public class News {
             }
         });
 
+        JButton add = new JButton("note");
+        JEditorPane note = new JEditorPane();
+        note.setSize(50, 500);
+        note.setText("foo");
+        JPanel p = new JPanel();
+        p.add(note,BorderLayout.CENTER);
+        p.add(add,BorderLayout.SOUTH);
         frame.add(table, BorderLayout.WEST);
         frame.add(text, BorderLayout.CENTER);
+        frame.add(p, BorderLayout.EAST);
         frame.add(slider, BorderLayout.SOUTH);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
