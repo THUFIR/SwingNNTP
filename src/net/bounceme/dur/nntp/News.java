@@ -22,6 +22,7 @@ public class News {
         defaultTableModel = messagesController.getDefaultTableModel();
         table.setModel(defaultTableModel);
         table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.getSelectionModel().setSelectionInterval(1, 1);
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent evt) {
@@ -47,20 +48,10 @@ public class News {
                 table.getSelectionModel().setSelectionInterval(1, 1);
             }
         });
-        table.getSelectionModel().setSelectionInterval(1, 1);
 
-
-        frame.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 0;
-        frame.add(table, c);
-        c.gridx = 1;
-        frame.add(text, c);
-        c.gridx = 0;
-        c.gridy = 1;
-        frame.add(slider, c);i
+        frame.add(table, BorderLayout.WEST);
+        frame.add(text, BorderLayout.CENTER);
+        frame.add(slider, BorderLayout.SOUTH);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
