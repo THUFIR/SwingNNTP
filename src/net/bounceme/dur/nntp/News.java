@@ -1,10 +1,7 @@
 package net.bounceme.dur.nntp;
 
 //merging to master
-
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -51,12 +48,20 @@ public class News {
             }
         });
         table.getSelectionModel().setSelectionInterval(1, 1);
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(3, 1));
-        panel.add(table);
-        panel.add(text);
-        panel.add(slider);
-        frame.add(panel);
+
+
+        frame.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        frame.add(table, c);
+        c.gridx = 1;
+        frame.add(text, c);
+        c.gridx = 0;
+        c.gridy = 1;
+        frame.add(slider, c);i
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.pack();
