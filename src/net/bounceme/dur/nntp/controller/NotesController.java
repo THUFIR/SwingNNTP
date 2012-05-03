@@ -1,6 +1,8 @@
 package net.bounceme.dur.nntp.controller;
 
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.persistence.EntityManager;
