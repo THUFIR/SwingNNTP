@@ -22,15 +22,19 @@ public class NotesController {
     private String PERSISTENCE_UNIT_NAME = "nntpPU";
 
     public NotesController() {
-        populateList();
         emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         em = emf.createEntityManager();
+        populateList();
+        LOG.info("em made???" + em.isOpen());
     }
 
     private void populateList() {
+        LOG.info("open?" + em.isOpen());
         em.getTransaction().begin();
-        Query q = em.createQuery("select * from Note");
+        LOG.info("trying to populate.....");
+        Query q = em.createQuery("select n from Note n");
         List results = q.getResultList();
+        LOG.info(results.toString());
         em.getTransaction().commit();
         setNotes(results);
         DefaultListModel dlm = new DefaultListModel();
