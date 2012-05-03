@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.swing.table.DefaultTableModel;
-import net.bounceme.dur.nntp.MessagesEnum;
+import net.bounceme.dur.nntp.controller.MessagesEnum;
 
 public class Detail extends javax.swing.JPanel {
 

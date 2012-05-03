@@ -6,8 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import net.bounceme.dur.nntp.MessageBean;
-import net.bounceme.dur.nntp.MessagesEnum;
+import net.bounceme.dur.nntp.model.MessageBean;
+import net.bounceme.dur.nntp.controller.MessagesEnum;
 
 public class Overview extends javax.swing.JPanel {
 

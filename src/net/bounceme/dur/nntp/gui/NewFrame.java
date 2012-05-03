@@ -4,7 +4,7 @@
  */
 package net.bounceme.dur.nntp.gui;
 
-import net.bounceme.dur.nntp.MessagesController;
+import net.bounceme.dur.nntp.controller.MessagesController;
 
 /**
  *

@@ -1,4 +1,4 @@
-package net.bounceme.dur.nntp;
+package net.bounceme.dur.nntp.model;
 
 import java.net.URL;
 import java.util.Date;

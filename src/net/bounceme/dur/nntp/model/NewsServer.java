@@ -1,9 +1,10 @@
-package net.bounceme.dur.nntp;
+package net.bounceme.dur.nntp.model;
 
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.*;
+import net.bounceme.dur.nntp.PropertiesReader;
 
 public class NewsServer {
 

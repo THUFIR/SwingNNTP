@@ -1,10 +1,12 @@
-package net.bounceme.dur.nntp;
+package net.bounceme.dur.nntp.controller;
 
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.swing.table.DefaultTableModel;
+import net.bounceme.dur.nntp.model.MessageBean;
+import net.bounceme.dur.nntp.model.NewsServer;
 
 public class MessagesController {
 
