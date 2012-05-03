@@ -18,6 +18,8 @@ public enum MessagesEnum {
     private int index;
     private int max;
     private Map<Integer, String> notes = new HashMap<Integer, String>();
+    private Message message;
+    private MessageBean messageBean;
 
     private MessagesEnum() {
         LOG.info("starting controller..");
@@ -60,12 +62,6 @@ public enum MessagesEnum {
         logModel(defaultTableModel);
         this.defaultTableModel = defaultTableModel;
         defaultTableModel.fireTableDataChanged();
-    }
-
-    public MessageBean getMessageBean(int row) {
-        Message message = messages.get(row);
-        MessageBean messageBean = new MessageBean(message);
-        return messageBean;
     }
 
     public int getIndex() {
@@ -115,5 +111,22 @@ public enum MessagesEnum {
             s = "no note yet";
         }
         return s;
+    }
+
+    public Message getMessage() {
+        return message;
+    }
+
+    private void setMessage(Message message) {
+        this.message = message;
+    }
+
+    public MessageBean getMessageBean() {
+        return messageBean;
+    }
+
+    public void setMessageBean(int row) {
+        setMessage(messages.get(row));
+        messageBean = new MessageBean(getMessage());
     }
 }

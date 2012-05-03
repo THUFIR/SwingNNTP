@@ -81,7 +81,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {&#xa;&#xa;            public void valueChanged(ListSelectionEvent evt) {&#xa;                int row = table.convertRowIndexToModel(table.getSelectedRow());&#xa;                row = Math.abs(row); //how can this be negative?&#xa;                LOG.fine(&quot;row &quot; + row);&#xa;                MessageBean messageBean = messagesController.getMessageBean(row);&#xa;                text.setText(messageBean.getContent());&#xa;                text.setContentType(&quot;text/html&quot;);&#xa;            }&#xa;        });"/>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {&#xa;&#xa;            public void valueChanged(ListSelectionEvent evt) {&#xa;                int row = table.convertRowIndexToModel(table.getSelectedRow());&#xa;                row = Math.abs(row); //how can this be negative?&#xa;                LOG.fine(&quot;row &quot; + row);&#xa;                messagesController.setMessageBean(row);&#xa;                MessageBean messageBean = messagesController.getMessageBean();&#xa;                text.setText(messageBean.getContent());&#xa;                text.setContentType(&quot;text/html&quot;);&#xa;            }&#xa;        });"/>
           </AuxValues>
         </Component>
       </SubComponents>

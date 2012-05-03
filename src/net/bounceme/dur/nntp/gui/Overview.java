@@ -49,7 +49,8 @@ public class Overview extends javax.swing.JPanel {
                 int row = table.convertRowIndexToModel(table.getSelectedRow());
                 row = Math.abs(row); //how can this be negative?
                 LOG.fine("row " + row);
-                MessageBean messageBean = messagesController.getMessageBean(row);
+                messagesController.setMessageBean(row);
+                MessageBean messageBean = messagesController.getMessageBean();
                 text.setText(messageBean.getContent());
                 text.setContentType("text/html");
             }

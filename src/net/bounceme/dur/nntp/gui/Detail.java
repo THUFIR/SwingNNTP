@@ -1,6 +1,7 @@
 package net.bounceme.dur.nntp.gui;
 
 import java.util.logging.Logger;
+import javax.mail.Message;
 import javax.swing.table.DefaultTableModel;
 import net.bounceme.dur.nntp.MessagesEnum;
 
@@ -9,8 +10,10 @@ public class Detail extends javax.swing.JPanel {
     private static final Logger LOG = Logger.getLogger(Detail.class.getName());
     private MessagesEnum messagesController = MessagesEnum.INSTANCE;
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
+    private Message message = null;
 
     public Detail() {
+        message = messagesController.getMessage();
         initComponents();
     }
 
