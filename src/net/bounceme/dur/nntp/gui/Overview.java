@@ -2,7 +2,7 @@ package net.bounceme.dur.nntp.gui;
 
 import java.util.logging.Logger;
 import javax.mail.Message;
-import javax.swing.JPanel;
+import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -118,6 +118,10 @@ public class Overview extends javax.swing.JPanel {
     private void detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsActionPerformed
         Detail detail = new Detail();
         detail.setMessage(message);
+        JFrame f = new JFrame();
+        f.add(detail);
+        f.pack();
+        f.setVisible(true);
     }//GEN-LAST:event_detailsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

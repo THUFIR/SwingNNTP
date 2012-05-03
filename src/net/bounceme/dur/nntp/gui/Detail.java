@@ -1,7 +1,10 @@
 package net.bounceme.dur.nntp.gui;
 
+import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.swing.table.DefaultTableModel;
 import net.bounceme.dur.nntp.MessagesEnum;
 
@@ -92,5 +95,12 @@ public class Detail extends javax.swing.JPanel {
 
     public void setMessage(Message message) {
         this.message = message;
+        try {
+            jTextPane1.setText(message.getContent().toString());
+        } catch (IOException ex) {
+            Logger.getLogger(Detail.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(Detail.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
