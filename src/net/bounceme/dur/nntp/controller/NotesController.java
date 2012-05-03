@@ -11,19 +11,28 @@ public class NotesController {
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = Logger.getLogger(NotesController.class.getName());
     private Message message;
-    private List<NoteBean> notes =  new ArrayList<NoteBean>();
+    private List<NoteBean> notes = new ArrayList<NoteBean>();
     private DefaultListModel defaultListModel = new DefaultListModel();
 
     public NotesController() {
+    }
+
+    private void load() {
+        DefaultListModel dlm = new DefaultListModel();
+        for (NoteBean n : getNotes()) {
+            dlm.addElement(n);
+        }
+        setDefaultListModel(dlm);
     }
 
     public Message getMessage() {
         return message;
     }
 
-    public void addNote(NoteBean noteBean){
+    public void addNote(NoteBean noteBean) {
         LOG.info(noteBean.toString());
         notes.add(noteBean);
+        load();
     }
 
     public void setMessage(Message message) {
