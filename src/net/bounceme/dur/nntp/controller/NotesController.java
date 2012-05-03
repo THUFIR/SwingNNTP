@@ -24,8 +24,8 @@ public class NotesController {
     public NotesController() {
         emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         em = emf.createEntityManager();
+        LOG.info("entity manager made???" + em.isOpen());
         populateList();
-        LOG.info("em made???" + em.isOpen());
     }
 
     private void populateList() {
@@ -33,8 +33,8 @@ public class NotesController {
         em.getTransaction().begin();
         LOG.info("trying to populate.....");
         Query q = em.createQuery("select n from Note n");
+        LOG.info(q.toString());
         List results = q.getResultList();
-        LOG.info(results.toString());
         em.getTransaction().commit();
         setNotes(results);
         DefaultListModel dlm = new DefaultListModel();
