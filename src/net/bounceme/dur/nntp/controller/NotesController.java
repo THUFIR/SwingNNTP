@@ -21,6 +21,10 @@ public class NotesController {
         return message;
     }
 
+    public void add(NoteBean noteBean){
+        notes.add(noteBean);
+    }
+
     public void setMessage(Message message) {
         this.message = message;
     }
