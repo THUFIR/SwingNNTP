@@ -26,8 +26,8 @@ public class NewFrame extends java.awt.Frame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new NewJPanel();
-        jPanel1 = new NewJPanel1();
+        jPanel2 = new Overview();
+        jPanel1 = new Detail();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {

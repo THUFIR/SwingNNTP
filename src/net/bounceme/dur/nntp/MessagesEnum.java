@@ -17,7 +17,7 @@ public enum MessagesEnum {
     private int pageSize = 35;
     private int index;
     private int max;
-    private Map<Integer,String> notes = new HashMap<Integer,String>();
+    private Map<Integer, String> notes = new HashMap<Integer, String>();
 
     private MessagesEnum() {
         LOG.info("starting controller..");
@@ -30,6 +30,7 @@ public enum MessagesEnum {
         messages = nntp.getMessages(getIndex() - getPageSize(), getIndex());
         DefaultTableModel dtm = new DefaultTableModel();
         dtm.addColumn("subject");
+        dtm.addColumn("id");
         for (Message message : messages) {
             MessageBean messageBean = new MessageBean(message);
             dtm.addRow(messageBean.getVector());
@@ -94,19 +95,19 @@ public enum MessagesEnum {
         this.pageSize = pageSize;
     }
 
-    public Map<Integer,String> getNotes() {
+    public Map<Integer, String> getNotes() {
         return notes;
     }
 
-    public void setNotes(Map<Integer,String> notes) {
+    public void setNotes(Map<Integer, String> notes) {
         this.notes = notes;
     }
 
-    public void addNote(Integer i,String s) {
-        notes.put(i,s);
+    public void addNote(Integer i, String s) {
+        notes.put(i, s);
     }
 
-    public String getNote(int i){
+    public String getNote(int i) {
         String s = null;
         try {
             s = notes.get(i);

@@ -59,11 +59,13 @@ public class NewsServer {
     public List<Message> getMessages(int start, int end) {
         LOG.log(Level.FINE, "NewsServer.getMessages {0} {1}", new Object[]{start, end});
         try {
-            messages = Arrays.asList(folder.getMessages(start, end));
+             messages = Arrays.asList(folder.getMessages(start, end));
+            Collections.reverse(messages);
             logMessages();
         } catch (MessagingException ex) {
             Logger.getLogger(NewsServer.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return Collections.unmodifiableList(messages);
     }
 }

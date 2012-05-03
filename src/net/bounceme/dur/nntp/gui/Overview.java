@@ -9,13 +9,13 @@ import net.bounceme.dur.nntp.MessageBean;
 import net.bounceme.dur.nntp.MessagesController;
 import net.bounceme.dur.nntp.MessagesEnum;
 
-public class NewJPanel extends javax.swing.JPanel {
+public class Overview extends javax.swing.JPanel {
 
-    private static final Logger LOG = Logger.getLogger(NewJPanel.class.getName());
+    private static final Logger LOG = Logger.getLogger(Overview.class.getName());
     private MessagesEnum messagesController = MessagesEnum.INSTANCE;
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
 
-    public NewJPanel() {
+    public Overview() {
         initComponents();
     }
 

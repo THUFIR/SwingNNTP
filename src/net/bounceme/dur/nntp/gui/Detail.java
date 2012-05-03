@@ -1,19 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.bounceme.dur.nntp.gui;
 
-/**
- *
- * @author thufir
- */
-public class NewJPanel1 extends javax.swing.JPanel {
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import net.bounceme.dur.nntp.MessagesEnum;
 
-    /**
-     * Creates new form NewJPanel1
-     */
-    public NewJPanel1() {
+public class Detail extends javax.swing.JPanel {
+
+    private static final Logger LOG = Logger.getLogger(Detail.class.getName());
+    private MessagesEnum messagesController = MessagesEnum.INSTANCE;
+    private DefaultTableModel defaultTableModel = new DefaultTableModel();
+
+    public Detail() {
         initComponents();
     }
 

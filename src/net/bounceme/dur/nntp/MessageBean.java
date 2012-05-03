@@ -28,6 +28,7 @@ public class MessageBean {
             setContent(message.getContent().toString());
             setId(message.getMessageNumber());
             vector.add(getSubject());
+            vector.add(getId());
         } catch (Exception ex) {
             Logger.getLogger(MessageBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -75,8 +76,8 @@ public class MessageBean {
     }
 
     @Override
-    public String toString(){
-        return getSubject();
+    public String toString() {
+        return getSubject() + getId();
     }
 
     public int getId() {
