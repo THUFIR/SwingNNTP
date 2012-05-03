@@ -13,7 +13,6 @@ public class Detail extends javax.swing.JPanel {
     private Message message = null;
 
     public Detail() {
-        message = messagesController.getMessage();
         initComponents();
     }
 
@@ -34,6 +33,7 @@ public class Detail extends javax.swing.JPanel {
         jTextPane2 = new javax.swing.JTextPane();
         jButton1 = new javax.swing.JButton();
 
+        jTextPane1.setContentType("text/html");
         jScrollPane1.setViewportView(jTextPane1);
 
         jList1.setModel(new javax.swing.AbstractListModel() {
@@ -85,4 +85,12 @@ public class Detail extends javax.swing.JPanel {
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane jTextPane2;
     // End of variables declaration//GEN-END:variables
+
+    public Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
+    }
 }

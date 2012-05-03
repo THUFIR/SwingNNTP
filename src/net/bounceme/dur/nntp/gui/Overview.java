@@ -1,12 +1,12 @@
 package net.bounceme.dur.nntp.gui;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import net.bounceme.dur.nntp.MessageBean;
-import net.bounceme.dur.nntp.MessagesController;
 import net.bounceme.dur.nntp.MessagesEnum;
 
 public class Overview extends javax.swing.JPanel {
@@ -14,6 +14,7 @@ public class Overview extends javax.swing.JPanel {
     private static final Logger LOG = Logger.getLogger(Overview.class.getName());
     private MessagesEnum messagesController = MessagesEnum.INSTANCE;
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
+    private Message message;
 
     public Overview() {
         initComponents();
@@ -50,6 +51,7 @@ public class Overview extends javax.swing.JPanel {
                 row = Math.abs(row); //how can this be negative?
                 LOG.fine("row " + row);
                 messagesController.setMessageBean(row);
+                setMessage(messagesController.getMessage());
                 MessageBean messageBean = messagesController.getMessageBean();
                 text.setText(messageBean.getContent());
                 text.setContentType("text/html");
@@ -74,16 +76,16 @@ public class Overview extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(details)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 926, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(details, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,10 +96,10 @@ public class Overview extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(details))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(slider, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                    .addComponent(details, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -114,7 +116,8 @@ public class Overview extends javax.swing.JPanel {
     }//GEN-LAST:event_sliderStateChanged
 
     private void detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsActionPerformed
-        LOG.info("details...");
+        Detail detail = new Detail();
+        detail.setMessage(message);
     }//GEN-LAST:event_detailsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -125,5 +128,13 @@ public class Overview extends javax.swing.JPanel {
     private javax.swing.JTable table;
     private javax.swing.JTextPane text;
     // End of variables declaration//GEN-END:variables
+
+    public Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
+    }
 
 }
