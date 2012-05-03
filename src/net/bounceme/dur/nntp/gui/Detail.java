@@ -5,17 +5,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 import net.bounceme.dur.nntp.controller.MessagesEnum;
+import net.bounceme.dur.nntp.controller.NotesController;
 
 public class Detail extends javax.swing.JPanel {
 
     private static final Logger LOG = Logger.getLogger(Detail.class.getName());
     private MessagesEnum messagesController = MessagesEnum.INSTANCE;
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
-    private Message message = null;
+    private Message message;
+    private NotesController notesController = new NotesController();
+    private DefaultListModel defaultListModel = new DefaultListModel();
 
     public Detail() {
+        defaultListModel = notesController.getDefaultListModel();
         initComponents();
     }
 
@@ -31,7 +36,7 @@ public class Detail extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        notesJList = new javax.swing.JList();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
         jButton1 = new javax.swing.JButton();
@@ -39,12 +44,8 @@ public class Detail extends javax.swing.JPanel {
         jTextPane1.setContentType("text/html");
         jScrollPane1.setViewportView(jTextPane1);
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList1);
+        notesJList.setModel(defaultListModel);
+        jScrollPane2.setViewportView(notesJList);
 
         jScrollPane3.setViewportView(jTextPane2);
 
@@ -56,7 +57,7 @@ public class Detail extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -81,12 +82,12 @@ public class Detail extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane jTextPane2;
+    private javax.swing.JList notesJList;
     // End of variables declaration//GEN-END:variables
 
     public Message getMessage() {
@@ -102,5 +103,13 @@ public class Detail extends javax.swing.JPanel {
         } catch (MessagingException ex) {
             Logger.getLogger(Detail.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public DefaultListModel getDefaultListModel() {
+        return defaultListModel;
+    }
+
+    public void setDefaultListModel(DefaultListModel defaultListModel) {
+        this.defaultListModel = defaultListModel;
     }
 }
