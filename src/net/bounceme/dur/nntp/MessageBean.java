@@ -5,9 +5,7 @@ import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.Address;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 
 public class MessageBean {
 
@@ -29,7 +27,7 @@ public class MessageBean {
             setSubject(message.getSubject());
             setContent(message.getContent().toString());
             setId(message.getMessageNumber());
-            vector.add(getSent());
+            vector.add(getSubject());
         } catch (Exception ex) {
             Logger.getLogger(MessageBean.class.getName()).log(Level.SEVERE, null, ex);
         }

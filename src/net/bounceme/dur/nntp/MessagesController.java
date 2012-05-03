@@ -30,8 +30,7 @@ public class MessagesController {
         dtm.addColumn("subject");
         for (Message message : messages) {
             MessageBean messageBean = new MessageBean(message);
-            Vector messageBeanAsVector = messageBean.getVector();
-            dtm.addRow(messageBeanAsVector);
+            dtm.addRow(messageBean.getVector());
         }
         setDefaultTableModel(dtm);
     }
