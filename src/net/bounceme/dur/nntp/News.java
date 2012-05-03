@@ -1,9 +1,9 @@
 package net.bounceme.dur.nntp;
 
-//merging to master
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -51,23 +51,30 @@ public class News {
             }
         });
 
-        JButton button1 = new JButton("note");
-
-        button1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                int row = table.getSelectedRow();
-                MessageBean messageBean = messagesController.getMessageBean(row);
-                int i = messageBean.getId();
-                String s = messagesController.getNote(i);
-            }
-        });
 
         JEditorPane note = new JEditorPane();
         note.setSize(50, 500);
         note.setText("foo");
+        JButton add = new JButton("note");
+
+        Action sendAction = new AbstractAction("Send") {
+
+            public void actionPerformed(ActionEvent ae) {
+                int row = table.getSelectedRow();
+                MessageBean messageBean = messagesController.getMessageBean(row);
+                int id = messageBean.getId();
+            }
+        };
+
+
+        add.setAction(sendAction);
+        text.setAction(sendAction);
+
+
+
         JPanel p = new JPanel();
         p.add(note, BorderLayout.CENTER);
-        p.add(button1, BorderLayout.SOUTH);
+        p.add(add, BorderLayout.SOUTH);
         frame.add(table, BorderLayout.WEST);
         frame.add(text, BorderLayout.CENTER);
         frame.add(p, BorderLayout.EAST);
