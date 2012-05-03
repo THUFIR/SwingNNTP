@@ -11,7 +11,7 @@ public class NotesController {
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = Logger.getLogger(NotesController.class.getName());
     private Message message;
-    private List<NoteBean> notes;
+    private List<NoteBean> notes =  new ArrayList<NoteBean>();
     private DefaultListModel defaultListModel = new DefaultListModel();
 
     public NotesController() {
@@ -21,7 +21,8 @@ public class NotesController {
         return message;
     }
 
-    public void add(NoteBean noteBean){
+    public void addNote(NoteBean noteBean){
+        LOG.info(noteBean.toString());
         notes.add(noteBean);
     }
 
