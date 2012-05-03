@@ -4,15 +4,15 @@
  */
 package net.bounceme.dur.nntp.gui;
 
+import net.bounceme.dur.nntp.MessagesController;
+
 /**
  *
  * @author thufir
  */
 public class NewFrame extends java.awt.Frame {
 
-    /**
-     * Creates new form NewFrame
-     */
+    MessagesController messagesController;
     public NewFrame() {
         initComponents();
     }
@@ -25,14 +25,21 @@ public class NewFrame extends java.awt.Frame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new NewJPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new NewJPanel();
+        jPanel1 = new NewJPanel1();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 exitForm(evt);
             }
         });
-        add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane1.addTab("tab1", jPanel2);
+        jTabbedPane1.addTab("tab2", jPanel1);
+
+        add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        jTabbedPane1.getAccessibleContext().setAccessibleName("overview");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -48,6 +55,7 @@ public class NewFrame extends java.awt.Frame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
@@ -57,5 +65,7 @@ public class NewFrame extends java.awt.Frame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

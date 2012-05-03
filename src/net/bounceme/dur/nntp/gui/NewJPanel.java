@@ -7,12 +7,13 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import net.bounceme.dur.nntp.MessageBean;
 import net.bounceme.dur.nntp.MessagesController;
+import net.bounceme.dur.nntp.MessagesEnum;
 
 public class NewJPanel extends javax.swing.JPanel {
 
     private static final Logger LOG = Logger.getLogger(NewJPanel.class.getName());
-    MessagesController messagesController = new MessagesController();
-    DefaultTableModel dtm = new DefaultTableModel();
+    private MessagesEnum messagesController = MessagesEnum.INSTANCE;
+    private DefaultTableModel defaultTableModel = new DefaultTableModel();
 
     public NewJPanel() {
         initComponents();
@@ -32,6 +33,7 @@ public class NewJPanel extends javax.swing.JPanel {
         table = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         text = new javax.swing.JTextPane();
+        details = new javax.swing.JButton();
 
         slider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -39,7 +41,7 @@ public class NewJPanel extends javax.swing.JPanel {
             }
         });
 
-        table.setModel(dtm);
+        table.setModel(defaultTableModel);
         table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
@@ -58,6 +60,13 @@ public class NewJPanel extends javax.swing.JPanel {
         text.setEditable(false);
         jScrollPane1.setViewportView(text);
 
+        details.setText("details");
+        details.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                detailsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,9 +77,12 @@ public class NewJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 926, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(details)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 926, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,8 +93,10 @@ public class NewJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(details))
                 .addContainerGap())
         );
 
@@ -93,15 +107,22 @@ public class NewJPanel extends javax.swing.JPanel {
         int index = slider.getValue();
         LOG.fine("slider " + index);
         messagesController.setIndex(index);
-        dtm = messagesController.getDefaultTableModel();
-        table.setModel(dtm);
+        defaultTableModel = messagesController.getDefaultTableModel();
+        table.setModel(defaultTableModel);
         table.getSelectionModel().setSelectionInterval(1, 1);
     }//GEN-LAST:event_sliderStateChanged
+
+    private void detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsActionPerformed
+        LOG.info("details...");
+    }//GEN-LAST:event_detailsActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton details;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSlider slider;
     private javax.swing.JTable table;
     private javax.swing.JTextPane text;
     // End of variables declaration//GEN-END:variables
+
 }
