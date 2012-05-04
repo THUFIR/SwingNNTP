@@ -1,4 +1,4 @@
-package net.bounceme.dur.nntp.gui;
+package net.bounceme.dur.nntp.view;
 
 import java.io.IOException;
 import java.util.logging.Level;

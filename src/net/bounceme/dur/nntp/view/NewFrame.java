@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.bounceme.dur.nntp.gui;
+package net.bounceme.dur.nntp.view;
 
 import net.bounceme.dur.nntp.controller.MessagesController;
 
@@ -26,8 +26,8 @@ public class NewFrame extends java.awt.Frame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new Overview();
-        jPanel1 = new Detail();
+        jPanel2 = new net.bounceme.dur.nntp.view.Overview();
+        jPanel1 = new net.bounceme.dur.nntp.view.Detail();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {

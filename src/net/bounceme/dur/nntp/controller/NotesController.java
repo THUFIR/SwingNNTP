@@ -3,10 +3,7 @@ package net.bounceme.dur.nntp.controller;
 import java.util.*;
 import java.util.logging.Logger;
 import javax.mail.Message;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import javax.swing.DefaultListModel;
 import net.bounceme.dur.nntp.model.NoteBean;
 
@@ -32,7 +29,8 @@ public class NotesController {
         LOG.info("open?" + em.isOpen());
         em.getTransaction().begin();
         LOG.info("trying to populate.....");
-        Query q = em.createQuery("select n from Note n");
+        //Query q = em.createQuery("SELECT n FROM NoteBean n WHERE n.id = :id");
+        Query q = em.createNamedQuery("NoteBean.findAll");
         LOG.info(q.toString());
         List results = q.getResultList();
         em.getTransaction().commit();

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.bounceme.dur.nntp.model;
 
 import java.io.Serializable;
@@ -9,19 +5,17 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author thufir
- */
 @Entity
 @Table(name = "NOTEBEAN", catalog = "nntp", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Notebean.findAll", query = "SELECT n FROM Notebean n"),
-    @NamedQuery(name = "Notebean.findById", query = "SELECT n FROM Notebean n WHERE n.id = :id"),
-    @NamedQuery(name = "Notebean.findByStamp", query = "SELECT n FROM Notebean n WHERE n.stamp = :stamp"),
-    @NamedQuery(name = "Notebean.findByNote", query = "SELECT n FROM Notebean n WHERE n.note = :note")})
+    @NamedQuery(name = "NoteBean.findAll", query = "SELECT n FROM NoteBean n"),
+    @NamedQuery(name = "NoteBean.findById", query = "SELECT n FROM NoteBean n WHERE n.id = :id"),
+    @NamedQuery(name = "NoteBean.findByStamp", query = "SELECT n FROM NoteBean n WHERE n.stamp = :stamp"),
+    @NamedQuery(name = "NoteBean.findByNote", query = "SELECT n FROM NoteBean n WHERE n.note = :note")
+})
 public class NoteBean implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -86,7 +80,6 @@ public class NoteBean implements Serializable {
 
     @Override
     public String toString() {
-        return "net.bounceme.dur.nntp.model.Notebean[ id=" + id + " ]";
+        return "net.bounceme.dur.nntp.model.NoteBean[ id=" + id + " ]";
     }
-
 }

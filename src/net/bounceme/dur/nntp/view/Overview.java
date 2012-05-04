@@ -1,4 +1,4 @@
-package net.bounceme.dur.nntp.gui;
+package net.bounceme.dur.nntp.view;
 
 import java.util.logging.Logger;
 import javax.mail.Message;
