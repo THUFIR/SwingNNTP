@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import net.bounceme.dur.nntp.controller.NotesController;
 
 @Entity
 @Table(name = "NoteBean")
@@ -37,22 +36,27 @@ public class NoteBean implements Serializable {
     private int messageId;
 
     public NoteBean() {
+        LOG.fine("no args");
     }
 
     public NoteBean(Long id) {
+        LOG.fine("id");
         this.id = id;
     }
 
     public NoteBean(Long id, Date stamp, int messageId) {
+        LOG.fine("id, stamp, messageId");
         this.id = id;
         this.stamp = stamp;
         this.messageId = messageId;
     }
 
     public NoteBean(Message message, String noteString) {
+        LOG.info("message, noteString");
         setMessageId(message.getMessageNumber());
         setNote(noteString);
         setStamp(new Date());
+        LOG.info(toString());
     }
 
     public Long getId() {
@@ -84,6 +88,7 @@ public class NoteBean implements Serializable {
     }
 
     public void setMessageId(int messageId) {
+        LOG.info(String.valueOf(messageId));
         this.messageId = messageId;
     }
 
@@ -109,6 +114,6 @@ public class NoteBean implements Serializable {
 
     @Override
     public String toString() {
-        return "net.bounceme.dur.nntp.model.NoteBean[ id=" + id + " ]";
+        return "NoteBean " + getId() + " " + getMessageId();
     }
 }

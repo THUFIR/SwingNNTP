@@ -21,16 +21,16 @@ public class NotesController {
     public NotesController() {
         emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         em = emf.createEntityManager();
-        LOG.info("entity manager made???" + em.isOpen());
+        LOG.fine("entity manager made???" + em.isOpen());
         populateList();
     }
 
     private void populateList() {
-        LOG.info("open?" + em.isOpen());
+        LOG.fine("open?" + em.isOpen());
         em.getTransaction().begin();
-        LOG.info("trying to populate.....");
+        LOG.fine("trying to populate.....");
         Query q = em.createNamedQuery("NoteBean.findAll");
-        LOG.info(q.toString());
+        LOG.fine(q.toString());
         List results = q.getResultList();
         em.getTransaction().commit();
         setNotes(results);
