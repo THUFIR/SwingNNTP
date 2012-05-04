@@ -37,7 +37,7 @@ public class Detail extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        notesJList = new javax.swing.JList();
+        notes = new javax.swing.JList();
         add = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         text = new javax.swing.JTextArea();
@@ -45,14 +45,14 @@ public class Detail extends javax.swing.JPanel {
         jTextPane1.setContentType("text/html");
         jScrollPane1.setViewportView(jTextPane1);
 
-        notesJList.setModel(defaultListModel);
-        notesJList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        notesJList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        notes.setModel(defaultListModel);
+        notes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        notes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                notesJListValueChanged(evt);
+                notesValueChanged(evt);
             }
         });
-        jScrollPane2.setViewportView(notesJList);
+        jScrollPane2.setViewportView(notes);
 
         add.setText("add");
         add.addActionListener(new java.awt.event.ActionListener() {
@@ -104,19 +104,21 @@ public class Detail extends javax.swing.JPanel {
         LOG.log(Level.INFO, "trying to add note \n\n{0}\n\n", noteBean);
         notesController.addNote(noteBean);
         defaultListModel = notesController.getDefaultListModel();
-        notesJList.setModel(defaultListModel);
+        notes.setModel(defaultListModel);
     }//GEN-LAST:event_addActionPerformed
 
-    private void notesJListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_notesJListValueChanged
-        LOG.info("value change " + notesJList.getSelectedValue().toString());
-    }//GEN-LAST:event_notesJListValueChanged
+    private void notesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_notesValueChanged
+        String s = notes.getSelectedValue().toString();
+        LOG.fine("value change " + s);
+        text.setText(s);
+    }//GEN-LAST:event_notesValueChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JList notesJList;
+    private javax.swing.JList notes;
     private javax.swing.JTextArea text;
     // End of variables declaration//GEN-END:variables
 
