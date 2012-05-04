@@ -1,5 +1,7 @@
 package net.bounceme.dur.nntp.model;
 
+//regenerate this class
+
 import java.net.URL;
 import java.util.Date;
 import java.util.Vector;
