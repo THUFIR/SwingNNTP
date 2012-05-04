@@ -1,5 +1,7 @@
 package net.bounceme.dur.nntp.model;
 
+//hmm read only clone?
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
