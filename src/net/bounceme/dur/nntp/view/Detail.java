@@ -46,6 +46,7 @@ public class Detail extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTextPane1);
 
         notesJList.setModel(defaultListModel);
+        notesJList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         notesJList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 notesJListValueChanged(evt);
@@ -107,7 +108,7 @@ public class Detail extends javax.swing.JPanel {
     }//GEN-LAST:event_addActionPerformed
 
     private void notesJListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_notesJListValueChanged
-        LOG.info("value change");
+        LOG.info("value change " + notesJList.getSelectedValue().toString());
     }//GEN-LAST:event_notesJListValueChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
