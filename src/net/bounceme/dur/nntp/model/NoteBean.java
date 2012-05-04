@@ -20,6 +20,7 @@ public class NoteBean implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID", nullable = false)
+    @GeneratedValue
     private Long id;
     @Column(name = "STAMP")
     @Temporal(TemporalType.DATE)
@@ -28,6 +29,7 @@ public class NoteBean implements Serializable {
     private String note;
 
     public NoteBean() {
+        stamp = new Date();
     }
 
     public NoteBean(Long id) {
