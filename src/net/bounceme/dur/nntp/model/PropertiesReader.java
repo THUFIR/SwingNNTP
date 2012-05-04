@@ -1,4 +1,4 @@
-package net.bounceme.dur.nntp;
+package net.bounceme.dur.nntp.model;
 
 import java.io.IOException;
 import java.util.Properties;

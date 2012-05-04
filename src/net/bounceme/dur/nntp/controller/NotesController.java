@@ -1,9 +1,13 @@
 package net.bounceme.dur.nntp.controller;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.mail.Message;
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.swing.DefaultListModel;
 import net.bounceme.dur.nntp.model.NoteBean;
 

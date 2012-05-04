@@ -108,9 +108,9 @@ public class Detail extends javax.swing.JPanel {
     }//GEN-LAST:event_addActionPerformed
 
     private void notesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_notesValueChanged
-        String s = notes.getSelectedValue().toString();
-        LOG.fine("value change " + s);
-        text.setText(s);
+        NoteBean n = (NoteBean)notes.getSelectedValue();
+        LOG.info(n.toString());
+        text.setText(n.getNote());
     }//GEN-LAST:event_notesValueChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
