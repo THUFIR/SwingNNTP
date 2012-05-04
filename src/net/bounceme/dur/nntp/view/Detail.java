@@ -94,9 +94,8 @@ public class Detail extends javax.swing.JPanel {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         LOG.fine(text.getText());
-        NoteBean nb = new NoteBean();
-        nb.setNote(text.getText());
-        notesController.addNote(nb);
+        NoteBean noteBean = new NoteBean(getMessage(),text.getText());
+        notesController.addNote(noteBean);
         defaultListModel = notesController.getDefaultListModel();
         notesJList.setModel(defaultListModel);
     }//GEN-LAST:event_addActionPerformed

@@ -1,29 +1,27 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.bounceme.dur.nntp.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.logging.Logger;
+import javax.mail.Message;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import net.bounceme.dur.nntp.controller.NotesController;
 
-/**
- *
- * @author thufir
- */
 @Entity
-@Table(name = "NOTEBEAN")
+@Table(name = "NoteBean")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Notebean.findAll", query = "SELECT n FROM Notebean n"),
-    @NamedQuery(name = "Notebean.findById", query = "SELECT n FROM Notebean n WHERE n.id = :id"),
-    @NamedQuery(name = "Notebean.findByStamp", query = "SELECT n FROM Notebean n WHERE n.stamp = :stamp"),
-    @NamedQuery(name = "Notebean.findByMessageId", query = "SELECT n FROM Notebean n WHERE n.messageId = :messageId")})
-public class Notebean implements Serializable {
+    @NamedQuery(name = "NoteBean.findAll", query = "SELECT n FROM NoteBean n"),
+    @NamedQuery(name = "NoteBean.findById", query = "SELECT n FROM NoteBean n WHERE n.id = :id"),
+    @NamedQuery(name = "NoteBean.findByStamp", query = "SELECT n FROM NoteBean n WHERE n.stamp = :stamp"),
+    @NamedQuery(name = "NoteBean.findByMessageId", query = "SELECT n FROM NoteBean n WHERE n.messageId = :messageId")})
+public class NoteBean implements Serializable {
+
     private static final long serialVersionUID = 1L;
+    private static final Logger LOG = Logger.getLogger(NoteBean.class.getName());
     @Id
+    @GeneratedValue
     @Basic(optional = false)
     @Column(name = "ID", nullable = false)
     private Long id;
@@ -38,17 +36,23 @@ public class Notebean implements Serializable {
     @Column(name = "MESSAGE_ID", nullable = false)
     private int messageId;
 
-    public Notebean() {
+    public NoteBean() {
     }
 
-    public Notebean(Long id) {
+    public NoteBean(Long id) {
         this.id = id;
     }
 
-    public Notebean(Long id, Date stamp, int messageId) {
+    public NoteBean(Long id, Date stamp, int messageId) {
         this.id = id;
         this.stamp = stamp;
         this.messageId = messageId;
+    }
+
+    public NoteBean(Message message, String noteString) {
+        setMessageId(message.getMessageNumber());
+        setNote(noteString);
+        setStamp(new Date());
     }
 
     public Long getId() {
@@ -93,10 +97,10 @@ public class Notebean implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Notebean)) {
+        if (!(object instanceof NoteBean)) {
             return false;
         }
-        Notebean other = (Notebean) object;
+        NoteBean other = (NoteBean) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -105,7 +109,6 @@ public class Notebean implements Serializable {
 
     @Override
     public String toString() {
-        return "net.bounceme.dur.nntp.model.Notebean[ id=" + id + " ]";
+        return "net.bounceme.dur.nntp.model.NoteBean[ id=" + id + " ]";
     }
-
 }

@@ -29,7 +29,6 @@ public class NotesController {
         LOG.info("open?" + em.isOpen());
         em.getTransaction().begin();
         LOG.info("trying to populate.....");
-        //Query q = em.createQuery("SELECT n FROM NoteBean n WHERE n.id = :id");
         Query q = em.createNamedQuery("NoteBean.findAll");
         LOG.info(q.toString());
         List results = q.getResultList();
