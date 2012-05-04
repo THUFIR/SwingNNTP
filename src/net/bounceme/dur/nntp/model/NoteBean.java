@@ -1,5 +1,7 @@
 package net.bounceme.dur.nntp.model;
 
+//merge to master
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
