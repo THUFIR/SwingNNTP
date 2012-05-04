@@ -46,6 +46,11 @@ public class Detail extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTextPane1);
 
         notesJList.setModel(defaultListModel);
+        notesJList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                notesJListValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(notesJList);
 
         add.setText("add");
@@ -94,13 +99,16 @@ public class Detail extends javax.swing.JPanel {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         LOG.fine(text.getText());
-        NoteBean noteBean = new NoteBean(getMessage(),text.getText());
+        NoteBean noteBean = new NoteBean(getMessage(), text.getText());
         LOG.log(Level.INFO, "trying to add note \n\n{0}\n\n", noteBean);
         notesController.addNote(noteBean);
         defaultListModel = notesController.getDefaultListModel();
         notesJList.setModel(defaultListModel);
     }//GEN-LAST:event_addActionPerformed
 
+    private void notesJListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_notesJListValueChanged
+        LOG.info("value change");
+    }//GEN-LAST:event_notesJListValueChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
     private javax.swing.JScrollPane jScrollPane1;
