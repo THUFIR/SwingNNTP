@@ -1,41 +1,54 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package net.bounceme.dur.nntp.model;
-
-//hmm read only clone?
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author thufir
+ */
 @Entity
-@Table(name = "NOTEBEAN", catalog = "nntp", schema = "")
+@Table(name = "NOTEBEAN")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "NoteBean.findAll", query = "SELECT n FROM NoteBean n"),
-    @NamedQuery(name = "NoteBean.findById", query = "SELECT n FROM NoteBean n WHERE n.id = :id"),
-    @NamedQuery(name = "NoteBean.findByStamp", query = "SELECT n FROM NoteBean n WHERE n.stamp = :stamp"),
-    @NamedQuery(name = "NoteBean.findByNote", query = "SELECT n FROM NoteBean n WHERE n.note = :note")
-})
-public class NoteBean implements Serializable {
-
+    @NamedQuery(name = "Notebean.findAll", query = "SELECT n FROM Notebean n"),
+    @NamedQuery(name = "Notebean.findById", query = "SELECT n FROM Notebean n WHERE n.id = :id"),
+    @NamedQuery(name = "Notebean.findByStamp", query = "SELECT n FROM Notebean n WHERE n.stamp = :stamp"),
+    @NamedQuery(name = "Notebean.findByMessageId", query = "SELECT n FROM Notebean n WHERE n.messageId = :messageId")})
+public class Notebean implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "ID", nullable = false)
-    @GeneratedValue
     private Long id;
-    @Column(name = "STAMP")
+    @Basic(optional = false)
+    @Column(name = "STAMP", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date stamp;
-    @Column(name = "NOTE", length = 255)
+    @Lob
+    @Column(name = "NOTE", length = 2147483647)
     private String note;
+    @Basic(optional = false)
+    @Column(name = "MESSAGE_ID", nullable = false)
+    private int messageId;
 
-    public NoteBean() {
-        stamp = new Date();
+    public Notebean() {
     }
 
-    public NoteBean(Long id) {
+    public Notebean(Long id) {
         this.id = id;
+    }
+
+    public Notebean(Long id, Date stamp, int messageId) {
+        this.id = id;
+        this.stamp = stamp;
+        this.messageId = messageId;
     }
 
     public Long getId() {
@@ -62,6 +75,14 @@ public class NoteBean implements Serializable {
         this.note = note;
     }
 
+    public int getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -72,10 +93,10 @@ public class NoteBean implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof NoteBean)) {
+        if (!(object instanceof Notebean)) {
             return false;
         }
-        NoteBean other = (NoteBean) object;
+        Notebean other = (Notebean) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -84,6 +105,7 @@ public class NoteBean implements Serializable {
 
     @Override
     public String toString() {
-        return "net.bounceme.dur.nntp.model.NoteBean[ id=" + id + " ]";
+        return "net.bounceme.dur.nntp.model.Notebean[ id=" + id + " ]";
     }
+
 }

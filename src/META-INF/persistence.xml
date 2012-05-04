@@ -3,6 +3,7 @@
   <persistence-unit name="nntpPU" transaction-type="RESOURCE_LOCAL">
     <provider>oracle.toplink.essentials.PersistenceProvider</provider>
     <class>net.bounceme.dur.nntp.model.NoteBean</class>
+    <class>net.bounceme.dur.nntp.model.Notebean</class>
     <properties>
       <property name="toplink.jdbc.user" value="java"/>
       <property name="toplink.jdbc.password" value="password"/>
