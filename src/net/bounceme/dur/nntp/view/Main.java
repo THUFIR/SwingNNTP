@@ -10,10 +10,10 @@ import net.bounceme.dur.nntp.controller.MessagesController;
  *
  * @author thufir
  */
-public class NewFrame extends java.awt.Frame {
+public class Main extends java.awt.Frame {
 
     MessagesController messagesController;
-    public NewFrame() {
+    public Main() {
         initComponents();
     }
 
@@ -59,7 +59,7 @@ public class NewFrame extends java.awt.Frame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new NewFrame().setVisible(true);
+                new Main().setVisible(true);
             }
         });
     }
