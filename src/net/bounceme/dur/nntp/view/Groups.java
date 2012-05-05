@@ -1,19 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.bounceme.dur.nntp.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.mail.Folder;
+import javax.swing.DefaultListModel;
+import net.bounceme.dur.nntp.controller.Usenet;
 
-/**
- *
- * @author thufir
- */
 public class Groups extends javax.swing.JPanel {
 
-    List<String> list = new ArrayList<String>();
+    private List<Folder> folders = new ArrayList<Folder>();
+    DefaultListModel defaultListModel = new DefaultListModel();
+    private Usenet usenet = Usenet.INSTANCE;
+
     public Groups() {
         initComponents();
     }
@@ -75,4 +73,12 @@ public class Groups extends javax.swing.JPanel {
     private javax.swing.JList groups;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    public List<Folder> getFolders() {
+        return folders;
+    }
+
+    public void setFolders(List<Folder> folders) {
+        this.folders = folders;
+    }
 }

@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.swing.table.DefaultTableModel;
 import net.bounceme.dur.nntp.model.MessageBean;
-import net.bounceme.dur.nntp.model.NewsServer;
 
 public enum MessagesEnum {
 
@@ -14,7 +13,7 @@ public enum MessagesEnum {
     private final long serialVersionUID = 1L;
     private final Logger LOG = Logger.getLogger(MessagesEnum.class.getName());
     private DefaultTableModel defaultTableModel = null;
-    private NewsServer nntp = new NewsServer();
+    private Usenet nntp = Usenet.INSTANCE;
     private List<Message> messages = new ArrayList<Message>();
     private int pageSize = 35;
     private int index;

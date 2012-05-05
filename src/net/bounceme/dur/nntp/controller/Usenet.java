@@ -1,40 +1,45 @@
-package net.bounceme.dur.nntp.model;
+package net.bounceme.dur.nntp.controller;
 
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.*;
+import javax.swing.DefaultListModel;
+import net.bounceme.dur.nntp.model.PropertiesReader;
 
-public class NewsServer {
+public enum Usenet {
 
-    private static final Logger LOG = Logger.getLogger(NewsServer.class.getName());
+    INSTANCE;
+    private final Logger LOG = Logger.getLogger(Usenet.class.getName());
     private Properties props = new Properties();
     private List<Message> messages = new ArrayList<Message>();
+    private DefaultListModel foldersListModel = new DefaultListModel();
     private boolean loaded = false;
     private Folder folder = null;
     private Folder root = null;
     private Store store = null;
     private int size;
 
-    public NewsServer() {
-        LOG.fine("SingletonNNTP..only once...");
+    Usenet() {
+        LOG.fine("Usenet..only once...");
         props = PropertiesReader.getProps();
         if (!loaded) {
             try {
                 loaded = connect();
             } catch (Exception ex) {
-                Logger.getLogger(NewsServer.class.getName()).log(Level.SEVERE, "FAILED TO LOAD MESSAGES", ex);
+                Logger.getLogger(Usenet.class.getName()).log(Level.SEVERE, "FAILED TO LOAD MESSAGES", ex);
             }
         }
     }
 
     private boolean connect() throws Exception {
-        LOG.fine("SingletonNNTP.connect..");
+        LOG.fine("Usenet.connect..");
         Session session = Session.getDefaultInstance(props);
         session.setDebug(false);
         store = session.getStore(new URLName(props.getProperty("nntp.host")));
         store.connect();
         root = store.getDefaultFolder();
+        loadFoldersList(Arrays.asList(root.listSubscribed()));
         folder = root.getFolder(props.getProperty("nntp.group"));
         folder.open(Folder.READ_ONLY);
         setSize(folder.getMessageCount());
@@ -59,13 +64,31 @@ public class NewsServer {
     public List<Message> getMessages(int start, int end) {
         LOG.log(Level.FINE, "NewsServer.getMessages {0} {1}", new Object[]{start, end});
         try {
-             messages = Arrays.asList(folder.getMessages(start, end));
+            messages = Arrays.asList(folder.getMessages(start, end));
             Collections.reverse(messages);
             logMessages();
         } catch (MessagingException ex) {
-            Logger.getLogger(NewsServer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Usenet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return Collections.unmodifiableList(messages);
     }
+
+    private void loadFoldersList(List<Folder> folders) {
+        DefaultListModel dlm = new DefaultListModel();
+        for (Folder f : folders) {
+            String name = f.getFullName();
+            dlm.addElement(name);
+        }
+        setFoldersListModel(dlm);
+    }
+
+    public DefaultListModel getFoldersListModel() {
+        return foldersListModel;
+    }
+
+    private void setFoldersListModel(DefaultListModel foldersListModel) {
+        this.foldersListModel = foldersListModel;
+    }
+
 }
