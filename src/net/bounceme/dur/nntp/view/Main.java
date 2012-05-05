@@ -1,18 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.bounceme.dur.nntp.view;
 
-import net.bounceme.dur.nntp.controller.MessagesController;
-
-/**
- *
- * @author thufir
- */
 public class Main extends java.awt.Frame {
 
-    MessagesController messagesController;
     public Main() {
         initComponents();
     }
