@@ -35,10 +35,12 @@ public enum Usenet {
     private boolean connect() throws Exception {
         LOG.fine("Usenet.connect..");
         Session session = Session.getDefaultInstance(props);
-        session.setDebug(false);
+        session.setDebug(true);
         store = session.getStore(new URLName(props.getProperty("nntp.host")));
         store.connect();
         root = store.getDefaultFolder();
+        Folder[] f = root.list();
+        LOG.warning("folders array " + f.length);
         loadFoldersList(Arrays.asList(root.list()));
         folder = root.getFolder(props.getProperty("nntp.group"));
         folder.open(Folder.READ_ONLY);
