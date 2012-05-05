@@ -39,7 +39,7 @@ public enum Usenet {
         store = session.getStore(new URLName(props.getProperty("nntp.host")));
         store.connect();
         root = store.getDefaultFolder();
-        loadFoldersList(Arrays.asList(root.listSubscribed()));
+        loadFoldersList(Arrays.asList(root.list()));
         folder = root.getFolder(props.getProperty("nntp.group"));
         folder.open(Folder.READ_ONLY);
         setSize(folder.getMessageCount());
@@ -75,15 +75,18 @@ public enum Usenet {
     }
 
     private void loadFoldersList(List<Folder> folders) {
+        LOG.log(Level.WARNING, "folders {0}", folders.size());
         DefaultListModel dlm = new DefaultListModel();
         for (Folder f : folders) {
-            String name = f.getFullName();
+            String name = f.getName();
             dlm.addElement(name);
+            LOG.warning(name);
         }
         setFoldersListModel(dlm);
     }
 
     public DefaultListModel getFoldersListModel() {
+        LOG.warning(foldersListModel.toString());
         return foldersListModel;
     }
 

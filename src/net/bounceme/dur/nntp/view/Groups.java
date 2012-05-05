@@ -9,7 +9,7 @@ import net.bounceme.dur.nntp.controller.Usenet;
 public class Groups extends javax.swing.JPanel {
 
     private List<Folder> folders = new ArrayList<Folder>();
-    private DefaultListModel defaultListModel = new DefaultListModel();
+    private DefaultListModel defaultListModel;
     private Usenet usenet = Usenet.INSTANCE;
 
     public Groups() {
