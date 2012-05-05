@@ -9,10 +9,11 @@ import net.bounceme.dur.nntp.controller.Usenet;
 public class Groups extends javax.swing.JPanel {
 
     private List<Folder> folders = new ArrayList<Folder>();
-    DefaultListModel defaultListModel = new DefaultListModel();
+    private DefaultListModel defaultListModel = new DefaultListModel();
     private Usenet usenet = Usenet.INSTANCE;
 
     public Groups() {
+        setDefaultListModel(usenet.getFoldersListModel());
         initComponents();
     }
 
@@ -28,11 +29,7 @@ public class Groups extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         groups = new javax.swing.JList();
 
-        groups.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        groups.setModel(defaultListModel);
         groups.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         groups.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -74,11 +71,11 @@ public class Groups extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    public List<Folder> getFolders() {
-        return folders;
+    public DefaultListModel getDefaultListModel() {
+        return defaultListModel;
     }
 
-    public void setFolders(List<Folder> folders) {
-        this.folders = folders;
+    public void setDefaultListModel(DefaultListModel defaultListModel) {
+        this.defaultListModel = defaultListModel;
     }
 }

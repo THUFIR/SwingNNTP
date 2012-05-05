@@ -17,6 +17,7 @@ public class Main extends java.awt.Frame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new net.bounceme.dur.nntp.view.Overview();
         jPanel1 = new net.bounceme.dur.nntp.view.Detail();
+        jPanel3 = new net.bounceme.dur.nntp.view.Groups();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -26,6 +27,7 @@ public class Main extends java.awt.Frame {
 
         jTabbedPane1.addTab("tab1", jPanel2);
         jTabbedPane1.addTab("tab2", jPanel1);
+        jTabbedPane1.addTab("tab3", jPanel3);
 
         add(jTabbedPane1, java.awt.BorderLayout.CENTER);
         jTabbedPane1.getAccessibleContext().setAccessibleName("overview");
@@ -55,6 +57,7 @@ public class Main extends java.awt.Frame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
