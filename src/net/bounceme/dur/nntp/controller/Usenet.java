@@ -19,6 +19,7 @@ public enum Usenet {
     private Folder root = null;
     private Store store = null;
     private int size;
+    private String group = null;
 
     Usenet() {
         LOG.fine("Usenet..only once...");
@@ -39,10 +40,8 @@ public enum Usenet {
         store = session.getStore(new URLName(props.getProperty("nntp.host")));
         store.connect();
         root = store.getDefaultFolder();
-        Folder[] f = root.list();
-        LOG.warning("folders array " + f.length);
         loadFoldersList(Arrays.asList(root.list()));
-        folder = root.getFolder(props.getProperty("nntp.group"));
+        folder = root.getFolder("gwene.com.economist");
         folder.open(Folder.READ_ONLY);
         setSize(folder.getMessageCount());
         return true;
@@ -94,6 +93,15 @@ public enum Usenet {
 
     private void setFoldersListModel(DefaultListModel foldersListModel) {
         this.foldersListModel = foldersListModel;
+    }
+
+    public void setGroup(String group) {
+        LOG.warning(group);
+        this.group = group;
+    }
+
+    public String getGroup() {
+        return group;
     }
 
 }

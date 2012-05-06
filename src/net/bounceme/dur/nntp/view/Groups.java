@@ -64,12 +64,8 @@ public class Groups extends javax.swing.JPanel {
 
     private void groupsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_groupsValueChanged
         String s = groups.getSelectedValue().toString();
-        LOG.severe(s);
-                /*
-                 * NoteBean n = (NoteBean)notes.getSelectedValue();
-                 * LOG.info(n.toString());
-        text.setText(n.getNote());
-                 */
+        LOG.fine(s);
+        usenet.setGroup(s);
     }//GEN-LAST:event_groupsValueChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList groups;
