@@ -33,7 +33,14 @@ public enum Usenet {
         }
     }
 
+    private void loadFolder() throws Exception {
+        folder = root.getFolder(getGroup());
+        folder.open(Folder.READ_ONLY);
+        setSize(folder.getMessageCount());
+    }
+
     private boolean connect() throws Exception {
+
         LOG.fine("Usenet.connect..");
         Session session = Session.getDefaultInstance(props);
         session.setDebug(true);
@@ -41,9 +48,7 @@ public enum Usenet {
         store.connect();
         root = store.getDefaultFolder();
         loadFoldersList(Arrays.asList(root.list()));
-        folder = root.getFolder("gwene.com.economist");
-        folder.open(Folder.READ_ONLY);
-        setSize(folder.getMessageCount());
+        setGroup(foldersListModel.getElementAt(0).toString());
         return true;
     }
 
@@ -98,10 +103,14 @@ public enum Usenet {
     public void setGroup(String group) {
         LOG.warning(group);
         this.group = group;
+        try {
+            loadFolder();
+        } catch (Exception ex) {
+            Logger.getLogger(Usenet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String getGroup() {
         return group;
     }
-
 }
