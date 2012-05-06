@@ -2,12 +2,14 @@ package net.bounceme.dur.nntp.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.mail.Folder;
 import javax.swing.DefaultListModel;
 import net.bounceme.dur.nntp.controller.Usenet;
 
 public class Groups extends javax.swing.JPanel {
 
+    private static final Logger LOG = Logger.getLogger(Groups.class.getName());
     private List<Folder> folders = new ArrayList<Folder>();
     private DefaultListModel defaultListModel;
     private Usenet usenet = Usenet.INSTANCE;
@@ -61,11 +63,14 @@ public class Groups extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void groupsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_groupsValueChanged
-        /*        NoteBean n = (NoteBean)notes.getSelectedValue();
-        LOG.info(n.toString());
-        text.setText(n.getNote());*/
+        String s = groups.getSelectedValue().toString();
+        LOG.severe(s);
+                /*
+                 * NoteBean n = (NoteBean)notes.getSelectedValue();
+                 * LOG.info(n.toString());
+        text.setText(n.getNote());
+                 */
     }//GEN-LAST:event_groupsValueChanged
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList groups;
     private javax.swing.JScrollPane jScrollPane1;
