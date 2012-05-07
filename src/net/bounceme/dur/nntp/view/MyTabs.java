@@ -15,7 +15,7 @@ public class MyTabs extends JTabbedPane {
         this.add("overview", overview);
         this.add("detail", details);
 
-        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        groups.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
 
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 String s = evt.getNewValue().toString();

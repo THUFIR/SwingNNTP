@@ -65,9 +65,7 @@ public class Groups extends javax.swing.JPanel {
 
     private void groupsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_groupsValueChanged
         String s = groups.getSelectedValue().toString();
-        //Object s = (Folder) groups.getSelectedValue();
         LOG.log(Level.FINE, " GROUP CLICKED IS  {0}", s);
-        //usenet.setGroup(s);
         this.firePropertyChange("group", null, s);
     }//GEN-LAST:event_groupsValueChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
