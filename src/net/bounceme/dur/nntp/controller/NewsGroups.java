@@ -19,18 +19,18 @@ public enum NewsGroups {
 
     public void loadFoldersList(List<Folder> folders) {
         setFolders(folders);
-        LOG.log(Level.WARNING, "folders {0}", folders.size());
+        LOG.log(Level.FINE, "folders {0}", folders.size());
         DefaultListModel dlm = new DefaultListModel();
         for (Folder f : getFolders()) {
             String name = f.getName();
             dlm.addElement(name);
-            LOG.warning(name);
+            LOG.fine(name);
         }
         setFoldersListModel(dlm);
     }
 
     public DefaultListModel getFoldersListModel() {
-        LOG.warning(foldersListModel.toString());
+        LOG.fine(foldersListModel.toString());
         return foldersListModel;
     }
 
@@ -57,14 +57,14 @@ public enum NewsGroups {
     }
 
     public String getGroup() {
-        LOG.severe("GROUP IS " + group);
+        LOG.fine("GROUP IS " + group);
         return group;
     }
 
     public void setGroup(String group) {
-        LOG.severe("trying..." + group);
+        LOG.fine("trying..." + group);
         for (Folder f : folders) {
-            LOG.severe(f.getFullName());
+            LOG.fine(f.getFullName());
             if (f.getFullName().equals(group)) {
                 this.group = group;
             }

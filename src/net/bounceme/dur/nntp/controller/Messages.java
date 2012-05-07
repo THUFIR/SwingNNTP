@@ -132,7 +132,7 @@ public enum Messages {
     }
 
     public void setGroup(String group) {
-        LOG.severe("changing group..");
+        LOG.fine("changing group..");
         usenet.setGroup(group);
         setMax(usenet.getSize() - 10);
         setIndex(getMax() - 10);

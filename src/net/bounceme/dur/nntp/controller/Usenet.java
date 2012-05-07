@@ -33,7 +33,7 @@ public enum Usenet {
     }
 
     private void loadFolder() throws Exception {
-        LOG.severe(ng.getGroup());
+        LOG.fine(ng.getGroup());
         folder = root.getFolder(ng.getGroup());
         folder.open(Folder.READ_ONLY);
         setSize(folder.getMessageCount());
