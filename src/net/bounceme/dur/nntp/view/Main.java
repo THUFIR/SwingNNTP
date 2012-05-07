@@ -53,7 +53,7 @@ public class Main extends java.awt.Frame {
     }//GEN-LAST:event_exitForm
 
     private void groupsPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_groupsPropertyChange
-        LOG.fine("prp chg "+ evt.getNewValue().toString());
+        LOG.fine("new group: "+ evt.getNewValue().toString());
     }//GEN-LAST:event_groupsPropertyChange
 
     /**

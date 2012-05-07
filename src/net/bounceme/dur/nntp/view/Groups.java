@@ -2,6 +2,7 @@ package net.bounceme.dur.nntp.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Folder;
 import javax.swing.DefaultListModel;
@@ -64,9 +65,10 @@ public class Groups extends javax.swing.JPanel {
 
     private void groupsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_groupsValueChanged
         String s = groups.getSelectedValue().toString();
-        LOG.fine(s);
-        usenet.setGroup(s);
-        this.firePropertyChange(s, null, s);
+        //Object s = (Folder) groups.getSelectedValue();
+        LOG.log(Level.FINE, " GROUP CLICKED IS  {0}", s);
+        //usenet.setGroup(s);
+        this.firePropertyChange("group", null, s);
     }//GEN-LAST:event_groupsValueChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList groups;
