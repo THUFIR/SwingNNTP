@@ -2,7 +2,6 @@ package net.bounceme.dur.nntp.view;
 
 import java.util.logging.Logger;
 import javax.swing.JTabbedPane;
-import net.bounceme.dur.nntp.controller.Usenet;
 
 public class MyTabs extends JTabbedPane {
 
