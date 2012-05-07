@@ -6,14 +6,14 @@ import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import net.bounceme.dur.nntp.controller.MessagesEnum;
+import net.bounceme.dur.nntp.controller.Messages;
 import net.bounceme.dur.nntp.controller.Usenet;
 import net.bounceme.dur.nntp.model.MessageBean;
 
 public class Overview extends javax.swing.JPanel {
 
     private static final Logger LOG = Logger.getLogger(Overview.class.getName());
-    private MessagesEnum messages = MessagesEnum.INSTANCE;
+    private Messages messages = Messages.INSTANCE;
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
     private Message message;
 

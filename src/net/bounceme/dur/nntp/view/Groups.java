@@ -18,6 +18,7 @@ public class Groups extends javax.swing.JPanel {
     private NewsGroups ng = NewsGroups.INSTANCE;
 
     public Groups() {
+        LOG.severe(ng.toString());
         setDefaultListModel(ng.getFoldersListModel());
         initComponents();
     }

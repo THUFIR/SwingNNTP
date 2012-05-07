@@ -7,14 +7,14 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
-import net.bounceme.dur.nntp.controller.MessagesEnum;
+import net.bounceme.dur.nntp.controller.Messages;
 import net.bounceme.dur.nntp.controller.NotesController;
 import net.bounceme.dur.nntp.model.NoteBean;
 
 public class Detail extends javax.swing.JPanel {
 
     private static final Logger LOG = Logger.getLogger(Detail.class.getName());
-    private MessagesEnum messagesController = MessagesEnum.INSTANCE;
+    private Messages messagesController = Messages.INSTANCE;
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
     private Message message;
     private NotesController notesController = new NotesController();

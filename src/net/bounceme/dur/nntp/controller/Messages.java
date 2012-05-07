@@ -7,11 +7,11 @@ import javax.mail.Message;
 import javax.swing.table.DefaultTableModel;
 import net.bounceme.dur.nntp.model.MessageBean;
 
-public enum MessagesEnum {
+public enum Messages {
 
     INSTANCE;
     private final long serialVersionUID = 1L;
-    private final Logger LOG = Logger.getLogger(MessagesEnum.class.getName());
+    private final Logger LOG = Logger.getLogger(Messages.class.getName());
     private DefaultTableModel defaultTableModel = null;
     private Usenet usenet = Usenet.INSTANCE;
     private List<Message> messages = new ArrayList<Message>();
@@ -22,7 +22,7 @@ public enum MessagesEnum {
     private Message message;
     private MessageBean messageBean;
 
-    private MessagesEnum() {
+    private Messages() {
         LOG.info("starting controller..");
         setMax(usenet.getSize() - 10);
         setIndex(getMax() - 10);
@@ -132,7 +132,7 @@ public enum MessagesEnum {
     }
 
     public void setGroup(String group) {
-        LOG.info("changing group..");
+        LOG.severe("changing group..");
         usenet.setGroup(group);
         setMax(usenet.getSize() - 10);
         setIndex(getMax() - 10);
