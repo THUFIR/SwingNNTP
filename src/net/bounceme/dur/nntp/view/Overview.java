@@ -7,7 +7,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import net.bounceme.dur.nntp.controller.Messages;
-import net.bounceme.dur.nntp.controller.Usenet;
 import net.bounceme.dur.nntp.model.MessageBean;
 
 public class Overview extends javax.swing.JPanel {
@@ -146,6 +145,7 @@ public class Overview extends javax.swing.JPanel {
 
     void setGroup(String group) {
         messages.setGroup(group);
+        initComponents();
     }
 
 }
