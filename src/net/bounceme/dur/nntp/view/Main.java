@@ -6,8 +6,10 @@ import net.bounceme.dur.nntp.controller.Usenet;
 public class Main extends java.awt.Frame {
 
     private final static Logger LOG = Logger.getLogger(Main.class.getName());
+
     public Main() {
         initComponents();
+        overviewHolder.add(overview);
     }
 
     /**
@@ -19,7 +21,7 @@ public class Main extends java.awt.Frame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        overview = new net.bounceme.dur.nntp.view.Overview();
+        overviewHolder = new net.bounceme.dur.nntp.view.Overview();
         detail = new net.bounceme.dur.nntp.view.Detail();
         groups = new net.bounceme.dur.nntp.view.Groups();
 
@@ -29,7 +31,7 @@ public class Main extends java.awt.Frame {
             }
         });
 
-        jTabbedPane1.addTab("tab1", overview);
+        jTabbedPane1.addTab("tab1", overviewHolder);
         jTabbedPane1.addTab("tab2", detail);
 
         groups.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -53,7 +55,9 @@ public class Main extends java.awt.Frame {
     }//GEN-LAST:event_exitForm
 
     private void groupsPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_groupsPropertyChange
-        LOG.fine("new group: "+ evt.getNewValue().toString());
+        String s = evt.getNewValue().toString();
+        LOG.fine("new group: " + s);
+        overview.setGroup(s);
     }//GEN-LAST:event_groupsPropertyChange
 
     /**
@@ -68,10 +72,11 @@ public class Main extends java.awt.Frame {
             }
         });
     }
+    private Overview overview = new Overview();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel detail;
     private javax.swing.JPanel groups;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JPanel overview;
+    private javax.swing.JPanel overviewHolder;
     // End of variables declaration//GEN-END:variables
 }

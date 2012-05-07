@@ -14,7 +14,9 @@ public class Overview extends javax.swing.JPanel {
     private static final Logger LOG = Logger.getLogger(Overview.class.getName());
     private MessagesEnum messagesController = MessagesEnum.INSTANCE;
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
+    private String group;
     private Message message;
+
 
     public Overview() {
         initComponents();
@@ -133,12 +135,22 @@ public class Overview extends javax.swing.JPanel {
     private javax.swing.JTextPane text;
     // End of variables declaration//GEN-END:variables
 
+
+
     public Message getMessage() {
         return message;
     }
 
     public void setMessage(Message message) {
         this.message = message;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 
 }
