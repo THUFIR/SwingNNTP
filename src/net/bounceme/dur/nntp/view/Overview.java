@@ -17,6 +17,7 @@ public class Overview extends javax.swing.JPanel {
     private Message message;
 
     public Overview() {
+        LOG.fine("new overview...");
         initComponents();
     }
 
@@ -123,7 +124,6 @@ public class Overview extends javax.swing.JPanel {
         f.pack();
         f.setVisible(true);
     }//GEN-LAST:event_detailsActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton details;
     private javax.swing.JScrollPane jScrollPane1;
@@ -132,8 +132,6 @@ public class Overview extends javax.swing.JPanel {
     private javax.swing.JTable table;
     private javax.swing.JTextPane text;
     // End of variables declaration//GEN-END:variables
-
-
 
     public Message getMessage() {
         return message;
@@ -145,7 +143,8 @@ public class Overview extends javax.swing.JPanel {
 
     void setGroup(String group) {
         messages.setGroup(group);
-        initComponents();
+        defaultTableModel = messages.getDefaultTableModel();
+        table.setModel(defaultTableModel);
+        table.getSelectionModel().setSelectionInterval(1, 1);
     }
-
 }

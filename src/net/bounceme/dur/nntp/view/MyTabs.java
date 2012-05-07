@@ -22,7 +22,7 @@ public class MyTabs extends JTabbedPane {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 String s = evt.getNewValue().toString();
                 LOG.fine(s);
-                overview.setGroup(s);
+                overview = new Overview();
             }
         });
 

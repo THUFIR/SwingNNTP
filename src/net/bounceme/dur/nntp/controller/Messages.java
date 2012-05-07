@@ -34,9 +34,9 @@ public enum Messages {
         DefaultTableModel dtm = new DefaultTableModel();
         dtm.addColumn("subject");
         dtm.addColumn("id");
-        for (Message message : messages) {
-            MessageBean messageBean = new MessageBean(message);
-            dtm.addRow(messageBean.getVector());
+        for (Message m : messages) {
+            MessageBean mb = new MessageBean(m);
+            dtm.addRow(mb.getVector());
         }
         setDefaultTableModel(dtm);
     }
@@ -51,7 +51,7 @@ public enum Messages {
             while (i.hasNext()) {
                 row.append(i.next());
             }
-            LOG.fine(row.toString());
+            LOG.info(row.toString());
         }
     }
 
@@ -60,7 +60,6 @@ public enum Messages {
     }
 
     public void setDefaultTableModel(DefaultTableModel defaultTableModel) {
-        logModel(defaultTableModel);
         this.defaultTableModel = defaultTableModel;
         defaultTableModel.fireTableDataChanged();
     }
