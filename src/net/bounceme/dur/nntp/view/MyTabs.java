@@ -2,6 +2,7 @@ package net.bounceme.dur.nntp.view;
 
 import java.util.logging.Logger;
 import javax.swing.JTabbedPane;
+import net.bounceme.dur.nntp.controller.Usenet;
 
 public class MyTabs extends JTabbedPane {
 
@@ -9,6 +10,7 @@ public class MyTabs extends JTabbedPane {
     private Overview overview = new Overview();
     private Detail details = new Detail();
     private Groups groups = new Groups();
+    private Usenet usenet = Usenet.INSTANCE;
 
     public MyTabs() {
         this.add("groups", groups);
@@ -19,7 +21,8 @@ public class MyTabs extends JTabbedPane {
 
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 String s = evt.getNewValue().toString();
-                LOG.severe(s);
+                LOG.fine(s);
+                overview.setGroup(s);
             }
         });
 

@@ -13,7 +13,7 @@ public enum MessagesEnum {
     private final long serialVersionUID = 1L;
     private final Logger LOG = Logger.getLogger(MessagesEnum.class.getName());
     private DefaultTableModel defaultTableModel = null;
-    private Usenet nntp = Usenet.INSTANCE;
+    private Usenet usenet = Usenet.INSTANCE;
     private List<Message> messages = new ArrayList<Message>();
     private int pageSize = 35;
     private int index;
@@ -24,13 +24,13 @@ public enum MessagesEnum {
 
     private MessagesEnum() {
         LOG.info("starting controller..");
-        setMax(nntp.getSize() - 10);
+        setMax(usenet.getSize() - 10);
         setIndex(getMax() - 10);
         loadTableModel();
     }
 
     private void loadTableModel() {
-        messages = nntp.getMessages(getIndex() - getPageSize(), getIndex());
+        messages = usenet.getMessages(getIndex() - getPageSize(), getIndex());
         DefaultTableModel dtm = new DefaultTableModel();
         dtm.addColumn("subject");
         dtm.addColumn("id");
@@ -129,5 +129,13 @@ public enum MessagesEnum {
     public void setMessageBean(int row) {
         setMessage(messages.get(row));
         messageBean = new MessageBean(getMessage());
+    }
+
+    public void setGroup(String group) {
+        LOG.info("changing group..");
+        usenet.setGroup(group);
+        setMax(usenet.getSize() - 10);
+        setIndex(getMax() - 10);
+        loadTableModel();
     }
 }

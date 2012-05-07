@@ -7,16 +7,15 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import net.bounceme.dur.nntp.controller.MessagesEnum;
+import net.bounceme.dur.nntp.controller.Usenet;
 import net.bounceme.dur.nntp.model.MessageBean;
 
 public class Overview extends javax.swing.JPanel {
 
     private static final Logger LOG = Logger.getLogger(Overview.class.getName());
-    private MessagesEnum messagesController = MessagesEnum.INSTANCE;
+    private MessagesEnum messages = MessagesEnum.INSTANCE;
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
-    private String group;
     private Message message;
-
 
     public Overview() {
         initComponents();
@@ -52,9 +51,9 @@ public class Overview extends javax.swing.JPanel {
                 int row = table.convertRowIndexToModel(table.getSelectedRow());
                 row = Math.abs(row); //how can this be negative?
                 LOG.fine("row " + row);
-                messagesController.setMessageBean(row);
-                setMessage(messagesController.getMessage());
-                MessageBean messageBean = messagesController.getMessageBean();
+                messages.setMessageBean(row);
+                setMessage(messages.getMessage());
+                MessageBean messageBean = messages.getMessageBean();
                 text.setText(messageBean.getContent());
                 text.setContentType("text/html");
             }
@@ -105,14 +104,14 @@ public class Overview extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        slider.setValue(messagesController.getMax());
+        slider.setValue(messages.getMax());
     }// </editor-fold>//GEN-END:initComponents
 
     private void sliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderStateChanged
         int index = slider.getValue();
         LOG.fine("slider " + index);
-        messagesController.setIndex(index);
-        defaultTableModel = messagesController.getDefaultTableModel();
+        messages.setIndex(index);
+        defaultTableModel = messages.getDefaultTableModel();
         table.setModel(defaultTableModel);
         table.getSelectionModel().setSelectionInterval(1, 1);
     }//GEN-LAST:event_sliderStateChanged
@@ -145,12 +144,8 @@ public class Overview extends javax.swing.JPanel {
         this.message = message;
     }
 
-    public String getGroup() {
-        return group;
-    }
-
-    public void setGroup(String group) {
-        this.group = group;
+    void setGroup(String group) {
+        messages.setGroup(group);
     }
 
 }
