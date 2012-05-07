@@ -7,7 +7,7 @@ import javax.mail.*;
 import javax.swing.DefaultListModel;
 import net.bounceme.dur.nntp.model.PropertiesReader;
 
-public enum Usenet  {
+public enum Usenet {
 
     INSTANCE;
     private final Logger LOG = Logger.getLogger(Usenet.class.getName());

@@ -66,7 +66,7 @@ public class Groups extends javax.swing.JPanel {
         String s = groups.getSelectedValue().toString();
         LOG.fine(s);
         usenet.setGroup(s);
-        firePropertyChange(s, s, s);
+        this.firePropertyChange(s, null, s);
     }//GEN-LAST:event_groupsValueChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList groups;

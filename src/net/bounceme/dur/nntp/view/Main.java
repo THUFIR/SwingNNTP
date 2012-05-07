@@ -31,6 +31,12 @@ public class Main extends java.awt.Frame {
 
         jTabbedPane1.addTab("tab1", overview);
         jTabbedPane1.addTab("tab2", detail);
+
+        groups.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                groupsPropertyChange(evt);
+            }
+        });
         jTabbedPane1.addTab("tab3", groups);
 
         add(jTabbedPane1, java.awt.BorderLayout.CENTER);
@@ -45,6 +51,10 @@ public class Main extends java.awt.Frame {
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
         System.exit(0);
     }//GEN-LAST:event_exitForm
+
+    private void groupsPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_groupsPropertyChange
+        LOG.fine("prp chg "+ evt.getNewValue().toString());
+    }//GEN-LAST:event_groupsPropertyChange
 
     /**
      * @param args the command line arguments
