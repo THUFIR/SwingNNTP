@@ -7,14 +7,12 @@ import java.util.logging.Logger;
 import javax.mail.Folder;
 import javax.swing.DefaultListModel;
 import net.bounceme.dur.nntp.controller.NewsGroups;
-import net.bounceme.dur.nntp.controller.Usenet;
 
 public class Groups extends javax.swing.JPanel {
 
     private static final Logger LOG = Logger.getLogger(Groups.class.getName());
     private List<Folder> folders = new ArrayList<Folder>();
     private DefaultListModel defaultListModel;
-    private Usenet usenet = Usenet.INSTANCE;
     private NewsGroups ng = NewsGroups.INSTANCE;
 
     public Groups() {

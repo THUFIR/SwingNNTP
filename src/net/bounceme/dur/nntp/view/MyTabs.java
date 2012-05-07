@@ -10,7 +10,6 @@ public class MyTabs extends JTabbedPane {
     private Overview overview = new Overview();
     private Detail details = new Detail();
     private Groups groups = new Groups();
-    private Usenet usenet = Usenet.INSTANCE;
 
     public MyTabs() {
         this.add("groups", groups);
@@ -24,6 +23,7 @@ public class MyTabs extends JTabbedPane {
                 LOG.fine(s);
                 overview = new Overview();
             }
+
         });
 
     }
