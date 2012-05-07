@@ -14,12 +14,14 @@ public enum Usenet {
     private Properties props = new Properties();
     private List<Message> messages = new ArrayList<Message>();
     private DefaultListModel foldersListModel = new DefaultListModel();
+    private NewsGroups ng = NewsGroups.INSTANCE;
     private boolean loaded = false;
     private Folder folder = null;
     private Folder root = null;
     private Store store = null;
     private int size;
     private String group = null;
+
 
     Usenet() {
         LOG.fine("Usenet..only once...");
@@ -47,7 +49,8 @@ public enum Usenet {
         store = session.getStore(new URLName(props.getProperty("nntp.host")));
         store.connect();
         root = store.getDefaultFolder();
-        loadFoldersList(Arrays.asList(root.list()));
+        //loadFoldersList(Arrays.asList(root.list()));
+        ng.loadFoldersList(Arrays.asList(root.list()));
         setGroup(foldersListModel.getElementAt(0).toString());
         return true;
     }
@@ -78,26 +81,6 @@ public enum Usenet {
         }
 
         return Collections.unmodifiableList(messages);
-    }
-
-    private void loadFoldersList(List<Folder> folders) {
-        LOG.log(Level.WARNING, "folders {0}", folders.size());
-        DefaultListModel dlm = new DefaultListModel();
-        for (Folder f : folders) {
-            String name = f.getName();
-            dlm.addElement(name);
-            LOG.warning(name);
-        }
-        setFoldersListModel(dlm);
-    }
-
-    public DefaultListModel getFoldersListModel() {
-        LOG.warning(foldersListModel.toString());
-        return foldersListModel;
-    }
-
-    private void setFoldersListModel(DefaultListModel foldersListModel) {
-        this.foldersListModel = foldersListModel;
     }
 
     public void setGroup(String group) {
