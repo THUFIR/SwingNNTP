@@ -76,7 +76,6 @@ public enum Usenet {
         } catch (MessagingException ex) {
             Logger.getLogger(Usenet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return Collections.unmodifiableList(messages);
     }
 

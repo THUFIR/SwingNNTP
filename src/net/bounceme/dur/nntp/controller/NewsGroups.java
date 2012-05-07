@@ -62,7 +62,13 @@ public enum NewsGroups {
     }
 
     public void setGroup(String group) {
-        this.group = group;
+        LOG.severe("trying..." + group);
+        for (Folder f : folders) {
+            LOG.severe(f.getFullName());
+            if (f.getFullName().equals(group)) {
+                this.group = group;
+            }
+        }
         getGroup();
     }
 }
