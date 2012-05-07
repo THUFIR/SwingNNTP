@@ -13,7 +13,6 @@ public enum Usenet {
     private final Logger LOG = Logger.getLogger(Usenet.class.getName());
     private Properties props = new Properties();
     private List<Message> messages = new ArrayList<Message>();
-    private DefaultListModel foldersListModel = new DefaultListModel();
     private NewsGroups ng = NewsGroups.INSTANCE;
     private boolean loaded = false;
     private Folder folder = null;
@@ -49,9 +48,9 @@ public enum Usenet {
         store = session.getStore(new URLName(props.getProperty("nntp.host")));
         store.connect();
         root = store.getDefaultFolder();
-        //loadFoldersList(Arrays.asList(root.list()));
         ng.loadFoldersList(Arrays.asList(root.list()));
-        setGroup(foldersListModel.getElementAt(0).toString());
+        //setGroup(foldersListModel.getElementAt(0).toString());
+        setGroup(ng.getFoldersListModel().getElementAt(0).toString());
         return true;
     }
 
