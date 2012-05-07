@@ -57,11 +57,12 @@ public enum NewsGroups {
     }
 
     public String getGroup() {
+        LOG.severe("GROUP IS " + group);
         return group;
     }
 
     public void setGroup(String group) {
-        LOG.severe(group);
         this.group = group;
+        getGroup();
     }
 }

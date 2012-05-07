@@ -19,7 +19,6 @@ public enum Usenet {
     private Folder root = null;
     private Store store = null;
     private int size;
-    private String group = null;
 
     Usenet() {
         LOG.fine("Usenet..only once...");
@@ -34,6 +33,7 @@ public enum Usenet {
     }
 
     private void loadFolder() throws Exception {
+        LOG.severe(ng.getGroup());
         folder = root.getFolder(ng.getGroup());
         folder.open(Folder.READ_ONLY);
         setSize(folder.getMessageCount());
@@ -81,7 +81,7 @@ public enum Usenet {
     }
 
     public void setGroup(String group) {
-        LOG.severe(group);
+        LOG.fine(group);
         ng.setGroup(group);
         try {
             loadFolder();
