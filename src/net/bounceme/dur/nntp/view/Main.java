@@ -1,7 +1,11 @@
 package net.bounceme.dur.nntp.view;
 
+import java.util.logging.Logger;
+import net.bounceme.dur.nntp.controller.Usenet;
+
 public class Main extends java.awt.Frame {
 
+    private final static Logger LOG = Logger.getLogger(Main.class.getName());
     public Main() {
         initComponents();
     }
@@ -15,9 +19,9 @@ public class Main extends java.awt.Frame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new net.bounceme.dur.nntp.view.Overview();
-        jPanel1 = new net.bounceme.dur.nntp.view.Detail();
-        jPanel3 = new net.bounceme.dur.nntp.view.Groups();
+        overview = new net.bounceme.dur.nntp.view.Overview();
+        detail = new net.bounceme.dur.nntp.view.Detail();
+        groups = new net.bounceme.dur.nntp.view.Groups();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -25,9 +29,9 @@ public class Main extends java.awt.Frame {
             }
         });
 
-        jTabbedPane1.addTab("tab1", jPanel2);
-        jTabbedPane1.addTab("tab2", jPanel1);
-        jTabbedPane1.addTab("tab3", jPanel3);
+        jTabbedPane1.addTab("tab1", overview);
+        jTabbedPane1.addTab("tab2", detail);
+        jTabbedPane1.addTab("tab3", groups);
 
         add(jTabbedPane1, java.awt.BorderLayout.CENTER);
         jTabbedPane1.getAccessibleContext().setAccessibleName("overview");
@@ -55,9 +59,9 @@ public class Main extends java.awt.Frame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel detail;
+    private javax.swing.JPanel groups;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel overview;
     // End of variables declaration//GEN-END:variables
 }
